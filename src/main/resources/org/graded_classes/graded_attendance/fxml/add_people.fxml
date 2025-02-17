@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="body_pane" maxHeight="348.0" maxWidth="600.0" minHeight="348.0" minWidth="600.0" stylesheets="@../css/new-admission.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.graded_classes.graded_attendance.controller.AddPeople">
+   <children>
+      <AnchorPane id="blur_layer" maxHeight="348.0" maxWidth="600.0" minHeight="348.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/new-admission.css" />
+      <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.058" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/app_uu.png" />
+         </image>
+         <viewport>
+            <Rectangle2D height="348.0" width="600.0" />
+         </viewport>
+      </ImageView>
+      <HBox alignment="CENTER" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" onMouseClicked="#onStudentClicked" spacing="5.0" style="-fx-background-color: #1C75BC; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/add_student.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Add Student" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" onMouseClicked="#onTeacherClicked" spacing="5.0" style="-fx-background-color: red; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/teacher_new.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Add Teacher" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

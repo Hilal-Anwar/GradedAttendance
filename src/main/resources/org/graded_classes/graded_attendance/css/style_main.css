@@ -1,0 +1,10 @@
+@import '../fonts/Fonts.css';
+
+#hhx:hover{
+     -fx-text-fill: red;
+}
+#floating-bar .button{
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
+     -fx-background-color:#1C75BC;
+     -fx-background-radius: 20;
+}

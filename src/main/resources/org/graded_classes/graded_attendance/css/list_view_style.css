@@ -1,0 +1,33 @@
+#customList {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Gilroy-Bold';
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+}
+#search{
+    -fx-font-size: 14px;
+    -fx-font-family: 'Gilroy-Bold';
+    -fx-background-color: #fafafa;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
+}
+
+#customList .list-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+}
+
+#customList .list-cell .label {
+    -fx-text-fill: black;
+}
+
+#customList .list-cell .hbox {
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+#customList .list-cell .hbox:hover {
+    -fx-background-color: #1C75BC20;
+}

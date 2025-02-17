@@ -1,0 +1,8 @@
+*{
+    -fx-background-color: #1C75BC;
+    -fx-background-radius: 5;
+    -fx-alignment:center;
+}
+* .label{
+    -fx-text-fill: white;
+}

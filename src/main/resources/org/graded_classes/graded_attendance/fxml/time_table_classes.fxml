@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.TimeTableView">
+   <TableView fx:id="table_view" editable="true" layoutX="47.0" layoutY="54.0" prefHeight="278.0" prefWidth="508.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="54.0">
+      <columnResizePolicy>
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
+   </TableView>
+   <Pagination layoutX="200.0" layoutY="346.0" pageCount="6" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
+   <Label layoutX="281.0" layoutY="14.0" AnchorPane.leftAnchor="281.0" AnchorPane.rightAnchor="281.0" AnchorPane.topAnchor="10.0" />
+</AnchorPane>

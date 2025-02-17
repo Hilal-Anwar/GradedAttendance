@@ -1,0 +1,21 @@
+@import '../fonts/Fonts.css';
+
+.text-field *{
+    fx-font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.label{
+    -fx-font-family: Gilroy-Bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+#body_pane{
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+#blur_layer{
+    -fx-background-color: #80808030;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}

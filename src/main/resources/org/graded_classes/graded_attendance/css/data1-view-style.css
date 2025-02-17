@@ -1,0 +1,18 @@
+.spinner .increment-arrow-button .increment-arrow {
+  /* The default Modena styling */
+  -fx-background-insets: 0 0 -1 0, 0;
+  -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em;  /* 2 4 2 4 */
+  -fx-shape: "m 12.6 -12 l -4.6 -4.6 l 1.4 -1.4 l 6 6 l -6 6 l -1.4 -1.4 l 4.6 -4.6 z";
+
+}
+
+.spinner{
+-fx-border-color:transparent;
+}
+.spinner .decrement-arrow-button .decrement-arrow {
+  /* The default Modena styling */
+
+  -fx-background-insets: 0 0 -1 0, 0;
+  -fx-padding: 0.166667em 0.333333em 0.166667em 0.333333em; /* 2 4 2 4 */
+  -fx-shape: "m -12.6 12 l 4.6 4.6 l -1.4 1.4 l -6 -6 l 6 -6 l 1.4 1.4 l -4.6 4.6 z";
+}

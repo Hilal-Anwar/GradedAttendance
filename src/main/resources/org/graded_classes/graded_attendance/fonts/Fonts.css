@@ -1,0 +1,37 @@
+
+
+@font-face {
+	font-family: 'Helvetica Rounded';
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/helvetica-rounded-bold.otf') format('truetype');
+}
+@font-face {
+	font-family: 'Helvetica';
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Helvetica.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Gilroy-Light';
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Gilroy-Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Gilroy-Medium';
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Gilroy-Bold';
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+	src: url('../fonts/Gilroy-Bold.ttf') format('truetype');
+}

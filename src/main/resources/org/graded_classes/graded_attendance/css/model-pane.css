@@ -1,0 +1,15 @@
+@import '../fonts/Fonts.css';
+#time-table {
+    -fx-background-color: #fafafa;
+    -fx-font-size:26px;
+}
+#time-table .button{
+    -fx-text-fill: white;
+    -fx-font-family:'Helvetica Rounded';
+    -fx-font-size:26px;
+
+}
+#time-table .button .text{
+    -fx-font-size:26px;
+
+}

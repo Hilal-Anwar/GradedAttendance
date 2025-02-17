@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS "StudentData"
+(
+    UID      VARCHAR(512) UNIQUE NOT NULL,
+    NAME     VARCHAR(512),
+    CLASS    VARCHAR(512),
+    PHONE    INT,
+    USER_ID  VARCHAR(512),
+    Subjects VARCHAR(512)
+);
