@@ -1,5 +1,5 @@
 target/
-main/java/org/graded_classes/graded_attendance/messaging/Bot.java
+src/main/java/org/graded_classes/graded_attendance/messaging/TelegramBot.java
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
