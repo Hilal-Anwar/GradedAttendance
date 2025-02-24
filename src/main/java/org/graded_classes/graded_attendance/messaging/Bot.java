@@ -13,6 +13,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
+        System.out.println("Testing file");
         return " ";
     }
 
@@ -23,6 +24,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        int a=10;
         var msg = update.getMessage();
         var user = msg.getFrom();
         System.out.println(user.getFirstName());

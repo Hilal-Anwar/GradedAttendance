@@ -1,5 +1,5 @@
 target/
-src/main/java/org/graded_classes/graded_attendance/messaging/Bot.java
+main/java/org/graded_classes/graded_attendance/messaging/Bot.java
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
