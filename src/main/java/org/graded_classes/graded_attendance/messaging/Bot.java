@@ -1,4 +1,4 @@
-package org.graded_classes.graded_attendance.messaging;
+/*package org.graded_classes.graded_attendance.messaging;
 
 import org.graded_classes.graded_attendance.data.MessageData;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -55,4 +55,4 @@ public class Bot extends TelegramLongPollingBot {
 
     }
 
-}
+}*/

@@ -13,8 +13,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import org.graded_classes.graded_attendance.data.DataLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +31,10 @@ public class StudentAttendance implements Initializable {
     private VBox search_box;
 
     ListView<HBox> list;
-
+    MainController homeController;
+    public StudentAttendance(MainController homeController) {
+        this.homeController = homeController;
+    }
 
     @FXML
     void hide_search(MouseEvent event) {
@@ -80,11 +81,10 @@ public class StudentAttendance implements Initializable {
     }
 
     private ObservableList<HBox> generate() {
-        DataLoader dataLoader = new DataLoader();
-        var l = dataLoader.getStudentData();
+      var l = homeController.dataLoader.getStudentData();
         System.out.println(l);
         ArrayList<HBox> boxes = new ArrayList<>();
-        for (var x : l.keySet()) {
+       for (var x : l.keySet()) {
             Label ed = new Label(x);
             ed.setMinWidth(50);
             Label name = new Label(l.get(x).name());

@@ -30,6 +30,7 @@ public class ListViewStudents implements Initializable {
                 String id = newValue.getId();
                 String name = id.substring(id.indexOf(" ") + 1);
                 search.setText(name);
+                System.out.println(search.getText());
             }
         });
 

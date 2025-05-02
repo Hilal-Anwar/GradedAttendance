@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.ListViewStudents">
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.ListViewStudents">
    <children>
       <Separator prefWidth="200.0" />
-      <ListView id="customList" fx:id="list" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/list_view_style.css" />
+      <ListView id="search-helper-list" fx:id="list" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/list_view_style.css" />
    </children>
 </VBox>

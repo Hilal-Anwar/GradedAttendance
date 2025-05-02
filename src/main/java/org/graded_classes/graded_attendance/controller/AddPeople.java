@@ -1,6 +1,5 @@
 package org.graded_classes.graded_attendance.controller;
 
-import atlantafx.base.controls.ModalPane;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,13 +10,14 @@ import java.io.IOException;
 import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 
 public class AddPeople {
-    ModalPane modalPane;
+   HomeController homeController;
    // @FXML
    // private WebView body_pane_back;
     //WebEngine webEngine1;
 
-    public AddPeople(ModalPane modalPane) {
-        this.modalPane = modalPane;
+    public AddPeople(HomeController homeController) {
+
+      this.homeController = homeController;
     }
 
     @FXML
@@ -31,12 +31,12 @@ public class AddPeople {
         Parent dialog = null;
         try {
             var x = new FXMLLoader(loadURL("fxml/new_student_layout.fxml"));
-            //x.setControllerFactory(c -> new AddPeople(modalPane));
+            x.setControllerFactory(c -> new AddStudent(homeController));
             dialog = x.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        modalPane.show(dialog);
+        homeController.modalPane.show(dialog);
     }
 
     @FXML
@@ -49,7 +49,7 @@ public class AddPeople {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        modalPane.show(dialog);
+        homeController.modalPane.show(dialog);
 
     }
 

@@ -8,3 +8,10 @@
      -fx-background-color:#1C75BC;
      -fx-background-radius: 20;
 }
+#root_back{
+     -fx-background-image: url('../icons/new-back1.svg');
+     -fx-background-size: cover;
+     -fx-background-repeat: no-repeat;
+     -fx-opacity: 0.07;
+     -fx-background-color: transparent;
+}

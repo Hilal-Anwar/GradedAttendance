@@ -1,11 +1,20 @@
+
 #customList {
     -fx-font-size: 14px;
     -fx-font-family: 'Gilroy-Bold';
-    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
+}
+#search-helper-list {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Gilroy-Bold';
     -fx-border-color: transparent;
     -fx-background-radius: 10;
 }
-#search{
+
+
+#search {
     -fx-font-size: 14px;
     -fx-font-family: 'Gilroy-Bold';
     -fx-background-color: #fafafa;
@@ -15,19 +24,51 @@
 }
 
 #customList .list-cell {
+    -fx-padding: 1.5;
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+}
+#search-helper-list .list-cell{
+    -fx-padding: 1.5;
     -fx-background-color: transparent;
     -fx-background-radius: 10;
 }
 
-#customList .list-cell .label {
+#customList .list-cell .hbox .label {
     -fx-text-fill: black;
+    -fx-alignment: center;
+}
+#search-helper-list .list-cell .hbox .label {
+    -fx-text-fill: black;
+    -fx-alignment: center;
 }
 
 #customList .list-cell .hbox {
     -fx-background-radius: 10;
     -fx-padding: 10;
 }
+#search-helper-list .list-cell .hbox {
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+#heading {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Gilroy-Bold';
+    -fx-background-color: #1C75BC;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
+}
+
+#heading .label {
+    -fx-alignment: center;
+    -fx-text-fill: #fafafa;
+}
 
 #customList .list-cell .hbox:hover {
+    -fx-background-color: #1C75BC20;
+}
+#search-helper-list .list-cell .hbox:hover {
     -fx-background-color: #1C75BC20;
 }

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import org.graded_classes.graded_attendance.controller.HomeController;
 import org.graded_classes.graded_attendance.controller.MainController;
 
 import java.io.IOException;

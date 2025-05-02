@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="20.81dp" height="12.98dp">
-    <path d="M25.4,0l-0.71,2.55l-20.69,0l0.72,-2.55l20.68,0z" fill="#1C75BC"/>
-    <path d="M24.13,4.64l-0.71,2.54l-20.74,0l0.71,-2.54l20.74,0z" fill="#1C75BC"/>
-    <path d="M22.81,9.27l-0.72,2.55l-20.69,0l0.72,-2.55l20.69,0z" fill="#1C75BC"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 11.82">
+    <g id="Layer_1-2">
+        <path d="M24,0l-.71,2.55H2.6l.72-2.55s20.68,0,20.68,0Z" style="fill:#1c75bc;"/>
+        <path d="M22.73,4.64l-.71,2.54H1.28l.71-2.54s20.74,0,20.74,0Z" style="fill:#1c75bc;"/>
+        <path d="M21.41,9.27l-.72,2.55H0l.72-2.55h20.69Z" style="fill:#1c75bc;"/>
+    </g>
 </svg>

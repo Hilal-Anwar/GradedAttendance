@@ -1,18 +1,22 @@
 @import '../fonts/Fonts.css';
 
-.text-field *{
-    fx-font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-}
-.label{
-    -fx-font-family: Gilroy-Bold;
-    -fx-font-size: 16px;
-    -fx-text-fill: white;
-}
 #body_pane{
     -fx-background-color: #fafafa;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
+}
+#body_pane .label{
+    -fx-font-family: Gilroy-Bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #fafafa;
+}
+#body_new_pane{
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-family: Gilroy-Medium;
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
 }
 #blur_layer{
     -fx-background-color: #80808030;
