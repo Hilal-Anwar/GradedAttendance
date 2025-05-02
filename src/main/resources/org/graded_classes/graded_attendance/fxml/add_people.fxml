@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="body_pane" maxHeight="348.0" maxWidth="600.0" minHeight="348.0" minWidth="600.0" stylesheets="@../css/new-admission.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.graded_classes.graded_attendance.controller.AddPeople">
+<AnchorPane id="body_pane" maxHeight="348.0" maxWidth="600.0" minHeight="348.0" minWidth="600.0" stylesheets="@../css/new-admission.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.AddPeople">
    <children>
       <AnchorPane id="blur_layer" maxHeight="348.0" maxWidth="600.0" minHeight="348.0" minWidth="600.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/new-admission.css" />
       <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.058" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../icons/app_uu.png" />
+            <Image url="@../icons/new-back-small.png" />
          </image>
          <viewport>
             <Rectangle2D height="348.0" width="600.0" />
