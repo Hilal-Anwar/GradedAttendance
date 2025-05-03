@@ -1,6 +1,7 @@
 package org.graded_classes.graded_attendance;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import org.graded_classes.graded_attendance.controller.HomeController;
 import org.graded_classes.graded_attendance.controller.StudentAttendance;
@@ -12,8 +13,8 @@ import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 public class GradedFxmlLoader {
 
 
-    public Parent createView(R path) {
-        Parent parent;
+    public Node createView(R path) {
+        Node parent;
         try {
             parent = new FXMLLoader(loadURL(path.getPath())).load();
         } catch (IOException e) {
@@ -22,8 +23,8 @@ public class GradedFxmlLoader {
         return parent;
     }
 
-    public Parent createView(R path, Object controller) {
-        Parent parent;
+    public Node createView(R path, Object controller) {
+        Node parent;
         try {
             var v = new FXMLLoader(loadURL(path.getPath()));
             v.setControllerFactory(c -> controller);

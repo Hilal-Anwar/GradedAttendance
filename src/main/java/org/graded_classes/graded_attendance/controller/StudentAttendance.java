@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.graded_classes.graded_attendance.GradedFxmlLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,8 +33,16 @@ public class StudentAttendance implements Initializable {
 
     ListView<HBox> list;
     MainController homeController;
-    public StudentAttendance(MainController homeController) {
+    GradedFxmlLoader gradedFxmlLoader;
+    VBox outer_main_box;
+    String id;
+    public StudentAttendance(MainController homeController,
+                             GradedFxmlLoader gradedFxmlLoader,
+                             VBox outer_main_box,String id) {
         this.homeController = homeController;
+        this.gradedFxmlLoader = gradedFxmlLoader;
+        this.outer_main_box = outer_main_box;
+        this.id = id;
     }
 
     @FXML
@@ -73,7 +82,7 @@ public class StudentAttendance implements Initializable {
             var x = new FXMLLoader(loadURL("fxml/list-for-search.fxml"));
             observableList = generate();
             filteredData = new FilteredList<>(observableList, s -> true);
-            x.setControllerFactory(c -> new ListViewStudents(filteredData, inputField));
+            x.setControllerFactory(c -> new ListViewStudents(filteredData, inputField, gradedFxmlLoader, outer_main_box,id));
             box = x.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -81,10 +90,10 @@ public class StudentAttendance implements Initializable {
     }
 
     private ObservableList<HBox> generate() {
-      var l = homeController.dataLoader.getStudentData();
+        var l = homeController.dataLoader.getStudentData();
         System.out.println(l);
         ArrayList<HBox> boxes = new ArrayList<>();
-       for (var x : l.keySet()) {
+        for (var x : l.keySet()) {
             Label ed = new Label(x);
             ed.setMinWidth(50);
             Label name = new Label(l.get(x).name());

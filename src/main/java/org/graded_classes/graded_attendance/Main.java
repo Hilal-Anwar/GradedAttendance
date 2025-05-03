@@ -21,7 +21,7 @@ Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(GradedResourceLoader.loadURL("fxml/main_layout.fxml"));
         fxmlLoader.setControllerFactory(c -> new MainController(stage));
         Parent root = fxmlLoader.load();
-        var scene = new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        var scene = new Scene(root);
         stage.setTitle("Graded Management");
         Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
         stage.setScene(scene);
