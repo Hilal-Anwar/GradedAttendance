@@ -117,7 +117,7 @@ public class HomeController implements Initializable {
         VBox studentAttendanceLayout = (VBox) mainController.gradedFxmlLoader.createView(R.student_attendance_layout,
                 new StudentAttendance(mainController,gradedFxmlLoader,outer_main_box,"stu_atten"));
         dummy_box.setMinHeight(70);
-        var data_viewer = gradedFxmlLoader.createView(R.student_fee_layout);
+        var data_viewer = gradedFxmlLoader.createView(R.data_view);
         VBox.setVgrow(studentAttendanceLayout, Priority.ALWAYS);
         AnchorPane.setRightAnchor(studentAttendanceLayout, 0.0);
         AnchorPane.setLeftAnchor(studentAttendanceLayout, 0.0);

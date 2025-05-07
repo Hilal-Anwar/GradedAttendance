@@ -4,6 +4,7 @@ import atlantafx.base.controls.ModalPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @FXML
     HBox selectedTab;
+    Tooltip tooltip;
     Stage stage;
     Node home, chat, calendar;
     Map<String, Image> toggleInImages = Map.of(
@@ -56,7 +58,8 @@ public class MainController implements Initializable {
         calendar = gradedFxmlLoader.createView(R.calendar_layout, new CalenderController());
         //database = gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
         main_view.setCenter(navigateView("home"));
-        System.out.println(dataLoader.getStudentData());
+        tooltip = new Tooltip(selectedTab.getId());
+        Tooltip.install(selectedTab, tooltip);
     }
 
     @FXML
@@ -68,7 +71,10 @@ public class MainController implements Initializable {
                 (ImageView) selectedTab.getChildren().getLast());
         toggleIn(root, rectangle, imageView);
         main_view.setCenter(navigateView(root.getId()));
+        Tooltip.uninstall(selectedTab, tooltip);
         selectedTab = root;
+        tooltip.setText(selectedTab.getId());
+        Tooltip.install(selectedTab, tooltip);
     }
 
     private Node navigateView(String id) {

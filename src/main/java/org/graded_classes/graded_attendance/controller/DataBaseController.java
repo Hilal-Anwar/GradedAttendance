@@ -51,16 +51,16 @@ public class DataBaseController implements Initializable {
             HBox.getHgrow(end_box);
             HBox hBox = new HBox(ed, name, grade,dob, end_box);
 
-           tem.setOnMousePressed(_ -> {
+           tem.setOnMousePressed(u -> {
                 System.out.println("Clicked");
                 mainController.dataLoader.removeStudent(x);
                 studentInfo.remove(hBox);
                list.setItems(FXCollections.observableList(studentInfo));
             });
-            hBox.setOnMouseEntered(_ -> {
+            hBox.setOnMouseEntered(m -> {
                 img.setOpacity(1);
             });
-            hBox.setOnMouseExited(_ -> {
+            hBox.setOnMouseExited( z-> {
                 img.setOpacity(0);
             });
             hBox.setSpacing(30);

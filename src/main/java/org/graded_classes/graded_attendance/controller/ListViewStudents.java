@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -51,9 +52,8 @@ public class ListViewStudents implements Initializable {
         if (id.equals("stu_atten")) {
 
         } else if (id.equals("st_fee")) {
-            var feeReport = (VBox) gradedFxmlLoader.createView(R.student_fee_layout, new StudentFeeLayout());
-            outer_main_box.getChildren().add(feeReport);
-            VBox.setVgrow(feeReport, Priority.ALWAYS);
+            var feeReport = gradedFxmlLoader.createView(R.student_fee_layout, new StudentFeeLayout());
+            outer_main_box.getChildren().set(outer_main_box.getChildren().size() - 1, feeReport);
             System.out.println(outer_main_box.getChildren().size());
         }
     }

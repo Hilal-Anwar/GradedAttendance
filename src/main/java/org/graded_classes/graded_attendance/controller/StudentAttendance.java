@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
@@ -38,7 +39,7 @@ public class StudentAttendance implements Initializable {
     String id;
     public StudentAttendance(MainController homeController,
                              GradedFxmlLoader gradedFxmlLoader,
-                             VBox outer_main_box,String id) {
+                             VBox outer_main_box, String id) {
         this.homeController = homeController;
         this.gradedFxmlLoader = gradedFxmlLoader;
         this.outer_main_box = outer_main_box;
