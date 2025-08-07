@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class DataBaseStatement {
+public class DatabaseStatement {
 
     Statement statement;
     Connection connection;
 
-    public DataBaseStatement(Connection connection) {
+    public DatabaseStatement(Connection connection) {
         this.connection = connection;
         try {
             statement=connection.createStatement();

@@ -67,7 +67,7 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
-                                <TextField fx:id="adahar_no" prefHeight="36.0" prefWidth="283.0" promptText="Adahar No." />
+                                <TextField fx:id="aadhaar_no" prefHeight="36.0" prefWidth="283.0" promptText="Adahar No." />
                                 <TextField fx:id="email_id" prefHeight="36.0" prefWidth="271.0" promptText="Email" />
                             </children>
                             <VBox.margin>

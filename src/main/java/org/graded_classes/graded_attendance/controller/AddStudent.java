@@ -21,14 +21,14 @@ public class AddStudent implements Initializable {
     private CheckBox agree;
 
     @FXML
-    private TextField adahar_no, ed_no, email_id,
+    private TextField aadhaar_no, ed_no, email_id,
             father_f_name, father_l_name, father_occ, first_name,
             g_num, info_about, last_name, mother_f_name, mother_l_name,
             mother_occ, previous_ins_name, reason_leaving, school_n, suggestions, telegram_id;
 
     @FXML
     private TextArea address;
-
+    String str;
     @FXML
     private DatePicker dob;
     private final String[] blood_groups_list = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
@@ -39,7 +39,6 @@ public class AddStudent implements Initializable {
 
     public AddStudent(HomeController homeController) {
         this.homeController = homeController;
-        System.out.println(homeController.dataLoader.getStudentData());
     }
 
     @Override
@@ -47,6 +46,9 @@ public class AddStudent implements Initializable {
         gender.setItems(FXCollections.observableArrayList(gender_list));
         blood_group.setItems(FXCollections.observableArrayList(blood_groups_list));
         _class.setItems(FXCollections.observableArrayList(classes_list));
+        str = getNextED();
+        System.out.println("call");
+        ed_no.setText(str);
     }
 
     @FXML
@@ -55,7 +57,7 @@ public class AddStudent implements Initializable {
         Button button = (Button) event.getSource();
         if (button.getText().equals("Apply")) {
             var studentInfo = getStudent();
-            if (agree.isSelected()){
+            if (agree.isSelected()) {
                 System.out.println(studentInfo);
                 homeController.dataLoader.addStudent(studentInfo);
                 homeController.modalPane.hide();
@@ -68,12 +70,12 @@ public class AddStudent implements Initializable {
     public Student getStudent() {
         String info = info_about.getText();
         return new Student(
-                getNextED(),
+                str,
                 first_name.getText() + " " + last_name.getText(),
                 email_id.getText(),
                 blood_group.getSelectionModel().getSelectedItem(),
                 g_num.getText(),
-                adahar_no.getText(),
+                aadhaar_no.getText(),
                 father_f_name.getText() + " " + father_l_name.getText(),
                 mother_f_name.getText() + " " + mother_l_name.getText(),
                 _class.getSelectionModel().getSelectedItem(),
@@ -101,20 +103,22 @@ public class AddStudent implements Initializable {
             list_of_subjects.remove(name);
 
     }
+
     public String getNextED() {
-       if (homeController.dataLoader.getStudentData().isEmpty())
+        if (homeController.dataLoader.getStudentData().isEmpty())
             return "ED01";
         else {
             var endKey = homeController.dataLoader.getStudentData().lastEntry().getKey();
-
+            System.out.println(endKey);
             return generate(endKey);
         }
     }
 
     public String generate(String endKey) {
-        long l = Long.parseLong(endKey.replaceAll("ED", ""))+1;
+        long l = Long.parseLong(endKey.replaceAll("ED", "")) + 1;
         return l < 10 ? "ED0" + l : "ED" + l;
     }
+
     public void init() {
 
     }

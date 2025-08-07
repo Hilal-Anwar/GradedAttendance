@@ -17,6 +17,7 @@ import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.R;
 import org.graded_classes.graded_attendance.data.DataLoader;
+import org.graded_classes.graded_attendance.data.Formatter;
 
 import java.net.URL;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class MainController implements Initializable {
     HBox selectedTab;
     Tooltip tooltip;
     Stage stage;
-    Node home, chat, calendar;
+    Node home, chat, calendar,account_and_balance;
     Map<String, Image> toggleInImages = Map.of(
             "home", new Image(GradedResourceLoader.load("icons/home_in.svg")),
             "chat", new Image(GradedResourceLoader.load("icons/chat_in.svg")),
@@ -58,7 +59,7 @@ public class MainController implements Initializable {
         calendar = gradedFxmlLoader.createView(R.calendar_layout, new CalenderController());
         //database = gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
         main_view.setCenter(navigateView("home"));
-        tooltip = new Tooltip(selectedTab.getId());
+        tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
     }
 
@@ -73,7 +74,7 @@ public class MainController implements Initializable {
         main_view.setCenter(navigateView(root.getId()));
         Tooltip.uninstall(selectedTab, tooltip);
         selectedTab = root;
-        tooltip.setText(selectedTab.getId());
+        tooltip.setText(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
     }
 
@@ -83,6 +84,7 @@ public class MainController implements Initializable {
             case "chat" -> chat;
             case "calender" -> calendar;
             case "database" -> gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
+            case "account_and_balance"-> account_and_balance;
             default -> null;
         };
     }

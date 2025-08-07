@@ -54,6 +54,7 @@ public class DataBaseController implements Initializable {
            tem.setOnMousePressed(u -> {
                 System.out.println("Clicked");
                 mainController.dataLoader.removeStudent(x);
+                mainController.dataLoader.getStudentData().remove(x.ed_no());
                 studentInfo.remove(hBox);
                list.setItems(FXCollections.observableList(studentInfo));
             });

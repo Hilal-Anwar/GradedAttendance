@@ -22,10 +22,7 @@ public class DataLoader {
     public DataLoader() {
         Connection connection = null;
         String monthName = today.getMonth().getDisplayName(TextStyle.SHORT, Locale.UK) + "-" + today.getYear();
-
-        System.out.println(monthName);
         String root_path = "G:/My Drive/Graded/data/";
-
         try {
             if (!new File(root_path).exists())
                 System.out.println(new File(root_path).mkdirs());
@@ -42,7 +39,8 @@ public class DataLoader {
             statement.executeUpdate(new SqlFileReader("data/TimeTable.sql").getQuery());
             att_statement.executeUpdate(new SqlFileReader("data/Attendance.sql").getQuery().
                     formatted(LocalDate.now().toString(), monthName));
-            att_statement.executeUpdate(new SqlFileReader("data/Fee.sql").getQuery().formatted("FEE_" + monthName));
+            att_statement.executeUpdate(new SqlFileReader("data/Fee.sql").getQuery().
+                    formatted("FEE_" + monthName));
             loadData();
             //statement.executeUpdate("ATTACH DATABASE 'G:/My Drive/Graded/data/Feb-2025/Graded_attendance.db' as 'TEST'");
            /* if (statement.executeQuery("select count(*) from TEST.'%s'".formatted(LocalDate.now().toString())).getInt("count(*)") == 0)
@@ -58,14 +56,7 @@ public class DataLoader {
             }*/
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        } /*finally {
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
-            }
-        }*/
+        }
     }
     public void removeStudent(Student student){
         try {
@@ -79,11 +70,13 @@ public class DataLoader {
         System.out.println(statement.toString());
         try {
             System.out.println(student);
-            statement.executeUpdate(student.toString());
+            studentData.put(student.ed_no(), student);
+            student.insertIntoDatabase(statement.getConnection());
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(student.toString());
+        System.out.println(student);
     }
 
     private void loadData() throws SQLException {

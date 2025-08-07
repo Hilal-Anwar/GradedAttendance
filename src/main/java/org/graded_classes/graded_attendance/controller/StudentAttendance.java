@@ -10,8 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
@@ -25,7 +23,7 @@ import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 
 public class StudentAttendance implements Initializable {
     @FXML
-    private TextField inputField;
+    TextField inputField;
     VBox box;
     ObservableList<HBox> observableList;
     FilteredList<HBox> filteredData;
@@ -33,21 +31,22 @@ public class StudentAttendance implements Initializable {
     private VBox search_box;
 
     ListView<HBox> list;
-    MainController homeController;
+    MainController mainController;
     GradedFxmlLoader gradedFxmlLoader;
     VBox outer_main_box;
     String id;
-    public StudentAttendance(MainController homeController,
+
+    public StudentAttendance(MainController mainController,
                              GradedFxmlLoader gradedFxmlLoader,
                              VBox outer_main_box, String id) {
-        this.homeController = homeController;
+        this.mainController = mainController;
         this.gradedFxmlLoader = gradedFxmlLoader;
         this.outer_main_box = outer_main_box;
         this.id = id;
     }
 
     @FXML
-    void hide_search(MouseEvent event) {
+    void hide_search() {
 
         if (search_box.getChildren().size() == 2) {
             search_box.getChildren().removeLast();
@@ -55,7 +54,7 @@ public class StudentAttendance implements Initializable {
     }
 
     @FXML
-    void show_search(MouseEvent event) {
+    void show_search() {
         if (search_box.getChildren().size() == 1) {
             search_box.getChildren().add(box);
         }
@@ -83,7 +82,7 @@ public class StudentAttendance implements Initializable {
             var x = new FXMLLoader(loadURL("fxml/list-for-search.fxml"));
             observableList = generate();
             filteredData = new FilteredList<>(observableList, s -> true);
-            x.setControllerFactory(c -> new ListViewStudents(filteredData, inputField, gradedFxmlLoader, outer_main_box,id));
+            x.setControllerFactory(c -> new ListViewStudents(this));
             box = x.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -91,8 +90,7 @@ public class StudentAttendance implements Initializable {
     }
 
     private ObservableList<HBox> generate() {
-        var l = homeController.dataLoader.getStudentData();
-        System.out.println(l);
+        var l = mainController.dataLoader.getStudentData();
         ArrayList<HBox> boxes = new ArrayList<>();
         for (var x : l.keySet()) {
             Label ed = new Label(x);

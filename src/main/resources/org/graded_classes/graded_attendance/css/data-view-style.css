@@ -3,13 +3,22 @@
     -fx-background-color: #fafafa;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
+    -fx-font-family: Gilroy-Medium;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
+}
+
+#date{
+    -fx-font-family: Gilroy-Medium;
+    -fx-font-size: 15px;
+}
+#time{
+    -fx-font-family: Gilroy-Medium;
+    -fx-font-size: 27px;
 }
 
 
 .data_viewer_bottom {
-    -fx-background-color: white;
-
+    -fx-background-color: #fafafa;
 }
 
 #button-cancel {

@@ -1,9 +1,9 @@
 create TABLE IF not exists "%s"
 (
-    UID    VARCHAR(512) UNIQUE NOT NULL,
-    NAME   VARCHAR(512),
-    CLASS  VARCHAR(50),
-    AMOUNT integer,
-    MODE   TEXT,
-    REC_BY TEXT
+    ed_no    VARCHAR(512) UNIQUE NOT NULL,
+    name   VARCHAR(512),
+    class  VARCHAR(50),
+    amount integer,
+    mode   TEXT,
+    rec_by TEXT
 );

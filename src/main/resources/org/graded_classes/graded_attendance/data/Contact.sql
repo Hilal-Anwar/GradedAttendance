@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "STUDENT_CONTACT"
 (
-    T_ID      INTEGER UNIQUE NOT NULL,
-    USER_NAME VARCHAR(512)   NOT NULL,
-    NAME      VARCHAR(512),
-    CLASS     VARCHAR(50)
+    ed_no      INTEGER UNIQUE NOT NULL,
+    telegram_id VARCHAR(512)   NOT NULL,
+    name      VARCHAR(512),
+    class     VARCHAR(50)
 );
