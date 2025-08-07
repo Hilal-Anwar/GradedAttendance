@@ -6,17 +6,16 @@ A comprehensive **attendance management system** with integrated grading capabil
 
 - **Smart Attendance Tracking**: Automated attendance recording and management
 - **Integrated Grading System**: Direct correlation between attendance and academic performance
-- **Responsive Web Interface**: Modern, user-friendly design built with CSS and HTML
+- **Responsive Desktop Interface**: Modern, user-friendly design built with JavaFX and CSS
 - **Real-time Analytics**: Track attendance patterns and generate insights
 - **Multi-user Support**: Different access levels for administrators, teachers, and students
 
 ## 🛠️ Technology Stack
 
-- **Backend**: Java (Spring Framework)
-- **Frontend**: HTML5, CSS3, JavaScript
+- **Backend**: Java
+- **Frontend**: JavaFX, CSS
 - **Build Tool**: Maven
-- **Database**: [Database type - requires verification]
-- **Server**: [Server technology - requires verification]
+- **Database**: SQLite
 
 ## 📋 Prerequisites
 
@@ -25,31 +24,40 @@ Before running this project, ensure you have the following installed:
 - **Java 11** or higher
 - **Maven 3.6+**
 - **Git**
-- [Additional database requirements]
+- **SQLite** (ensure the SQLite JDBC driver is included in the project dependencies)
 
 ## 🚀 Installation & Setup
 
 ### 1. Clone the Repository
+```bash
 git clone https://github.com/Hilal-Anwar/GradedAttendance.git
 cd GradedAttendance
+```
 
 ### 2. Build the Project
 Using Maven wrapper (recommended)
+```bash
 ./mvnw clean install
+```
 
 Or using system Maven
+```bash
 mvn clean install
+```
 
 ### 3. Run the Application
 Using Maven wrapper
-./mvnw spring-boot:run
+```bash
+./mvnw javafx:run
+```
 
 Or using system Maven
-mvn spring-boot:run
+```bash
+mvn javafx:run
+```
 
 ### 4. Access the Application
-Open your web browser and navigate to:
-http://localhost:8080
+The application will launch a desktop window upon successful execution.
 
 ## 📁 Project Structure
 
@@ -60,10 +68,7 @@ GradedAttendance/
 │ │ ├── java/
 │ │ │ └── [Java source files]
 │ │ └── resources/
-│ │ ├── static/
-│ │ │ └── [CSS, JS, images]
-│ │ └── templates/
-│ │ └── [HTML templates]
+│ │     └── [CSS, FXML files, SQLite database file]
 ├── pom.xml
 ├── mvnw
 ├── mvnw.cmd
@@ -80,7 +85,19 @@ GradedAttendance/
 ## 🔧 Configuration
 
 ### Database Configuration
-[Configuration details to be added based on application.properties]
+Ensure the SQLite JDBC driver is included in your `pom.xml`. Example dependency:
+```xml
+<dependency>
+    <groupId>org.xerial</groupId>
+    <artifactId>sqlite-jdbc</artifactId>
+    <version>3.46.1</version>
+</dependency>
+```
+
+Configure the database connection in your application properties or configuration file. Example:
+```properties
+jdbc.url=jdbc:sqlite:graded_attendance.db
+```
 
 ### Application Properties
 [Key configuration options to be documented]
@@ -115,7 +132,7 @@ We welcome contributions! Please follow these steps:
 - Initial release
 - Core attendance tracking functionality
 - Basic grading system integration
-- Responsive web interface
+- Responsive desktop interface
 
 ## 📜 License
 
