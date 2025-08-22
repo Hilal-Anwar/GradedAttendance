@@ -2,6 +2,8 @@
 
 A comprehensive **attendance management system** with integrated grading capabilities, designed to streamline educational institution workflows and provide efficient student attendance tracking.
 
+![64521](https://github.com/user-attachments/assets/a250851d-d948-42c8-b587-b665bb08e48c)
+
 ## 🚀 Features
 
 - **Smart Attendance Tracking**: Automated attendance recording and management
