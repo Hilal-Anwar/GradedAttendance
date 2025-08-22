@@ -2,6 +2,7 @@ package org.graded_classes.graded_attendance;
 
 import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ Main extends Application {
         stage.setScene(scene);
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/app_icon.png"))));
         stage.show();
+        stage.setOnCloseRequest(_ -> System.exit(1));
     }
 
     public static void main(String[] args) {

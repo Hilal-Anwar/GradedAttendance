@@ -6,11 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
-import org.graded_classes.graded_attendance.data.DataLoader;
+import org.graded_classes.graded_attendance.data.GradedDataLoader;
 
 import java.net.URL;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,11 +40,11 @@ public class StudentFeeLayout implements Initializable {
     @FXML
     Spinner<Integer> years;
     private Button selectedMonth;
-    DataLoader dataLoader;
+    GradedDataLoader gradedDataLoader;
     String ed;
 
-    public StudentFeeLayout(DataLoader dataLoader, String ed) {
-        this.dataLoader = dataLoader;
+    public StudentFeeLayout(GradedDataLoader gradedDataLoader, String ed) {
+        this.gradedDataLoader = gradedDataLoader;
         this.ed = ed;
     }
 
@@ -56,7 +54,7 @@ public class StudentFeeLayout implements Initializable {
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(listYears);
         valueFactory.setValue(Calendar.getInstance().get(Calendar.YEAR));
         years.setValueFactory(valueFactory);
-        System.out.println(dataLoader.getStudentData());
+        System.out.println(gradedDataLoader.getStudentData());
         current_date.setText(LocalDate.now().getDayOfMonth() + " " +
                 format(LocalDate.now().getMonth().toString()) +
                 " " + LocalDate.now().getYear());

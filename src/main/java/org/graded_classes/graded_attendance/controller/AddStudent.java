@@ -29,6 +29,11 @@ public class AddStudent implements Initializable {
     @FXML
     private TextArea address;
     String str;
+    HashSet<String> abandonedList = new HashSet<>();
+    @FXML
+    private Button submit;
+    @FXML
+    private Button cancel;
     @FXML
     private DatePicker dob;
     private final String[] blood_groups_list = {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"};
@@ -47,7 +52,6 @@ public class AddStudent implements Initializable {
         blood_group.setItems(FXCollections.observableArrayList(blood_groups_list));
         _class.setItems(FXCollections.observableArrayList(classes_list));
         str = getNextED();
-        System.out.println("call");
         ed_no.setText(str);
     }
 
@@ -59,7 +63,7 @@ public class AddStudent implements Initializable {
             var studentInfo = getStudent();
             if (agree.isSelected()) {
                 System.out.println(studentInfo);
-                homeController.dataLoader.addStudent(studentInfo);
+                homeController.gradedDataLoader.addStudent(studentInfo);
                 homeController.modalPane.hide();
             }
         } else if (button.getText().equals("Cancel")) {
@@ -105,13 +109,20 @@ public class AddStudent implements Initializable {
     }
 
     public String getNextED() {
-        if (homeController.dataLoader.getStudentData().isEmpty())
+        if (homeController.gradedDataLoader.getStudentData().isEmpty())
             return "ED01";
+        else if (abandonedEdPresent()){
+                return "";
+        }
         else {
-            var endKey = homeController.dataLoader.getStudentData().lastEntry().getKey();
+            var endKey = homeController.gradedDataLoader.getStudentData().lastEntry().getKey();
             System.out.println(endKey);
             return generate(endKey);
         }
+    }
+
+    private boolean abandonedEdPresent() {
+        return false;
     }
 
     public String generate(String endKey) {

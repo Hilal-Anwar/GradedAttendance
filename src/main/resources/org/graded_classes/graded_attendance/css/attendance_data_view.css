@@ -1,0 +1,22 @@
+#offLabel {
+    -fx-text-fill: "#8d8989";
+    -fx-font-size: 15px;
+    -fx-font-family: "Helvetica";
+}
+
+#onLabel {
+    -fx-font-family: 'Helvetica Rounded';
+    -fx-font-size: 14px;
+}
+.toggle-switch > .label-container > .label {
+    -fx-font-family: 'Helvetica Rounded';
+    -fx-font-size: 14px;
+    -fx-text-fill: red;
+
+}
+.toggle-switch:selected > .label-container > .label {
+    -fx-font-family: 'Helvetica Rounded';
+    -fx-font-size: 14px;
+    -fx-text-fill: #1C75BC;
+
+}

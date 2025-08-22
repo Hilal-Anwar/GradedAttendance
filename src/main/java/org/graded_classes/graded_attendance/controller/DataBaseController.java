@@ -29,9 +29,8 @@ public class DataBaseController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        var map = mainController.dataLoader.getStudentData().values();
+        var map = mainController.gradedDataLoader.getStudentData().values();
         ArrayList<HBox> studentInfo = new ArrayList<>();
-       // studentInfo.add(getHeading());
         for (var x : map) {
             Label ed = new Label(x.ed_no());
             ed.setMinWidth(50);
@@ -40,28 +39,28 @@ public class DataBaseController implements Initializable {
             name.setMaxWidth(200);
             Label grade = new Label(x._class());
             grade.setMinWidth(50);
-            Label dob= new Label(x.dob());
+            Label dob = new Label(x.dob());
             dob.setMinWidth(150);
             ImageView img = new ImageView(new Image(GradedResourceLoader.load("icons/delete.svg")));
             img.setOpacity(0);
-            HBox tem=new HBox(img);
+            HBox tem = new HBox(img);
             HBox end_box = new HBox(tem);
             end_box.setAlignment(Pos.CENTER_RIGHT);
             end_box.setMinWidth(95);
             HBox.getHgrow(end_box);
-            HBox hBox = new HBox(ed, name, grade,dob, end_box);
+            HBox hBox = new HBox(ed, name, grade, dob, end_box);
 
-           tem.setOnMousePressed(u -> {
-                System.out.println("Clicked");
-                mainController.dataLoader.removeStudent(x);
-                mainController.dataLoader.getStudentData().remove(x.ed_no());
-                studentInfo.remove(hBox);
-               list.setItems(FXCollections.observableList(studentInfo));
+            tem.setOnMousePressed(u -> {
+                if (mainController.gradedDataLoader.removeStudent(x)) {
+                    mainController.gradedDataLoader.getStudentData().remove(x.ed_no());
+                    studentInfo.remove(hBox);
+                    list.setItems(FXCollections.observableList(studentInfo));
+                }
             });
             hBox.setOnMouseEntered(m -> {
                 img.setOpacity(1);
             });
-            hBox.setOnMouseExited( z-> {
+            hBox.setOnMouseExited(z -> {
                 img.setOpacity(0);
             });
             hBox.setSpacing(30);
@@ -81,9 +80,9 @@ public class DataBaseController implements Initializable {
         name.setMaxWidth(200);
         Label grade = new Label("Class");
         grade.setMinWidth(50);
-        Label dob= new Label("Date of birth");
+        Label dob = new Label("Date of birth");
         dob.setMinWidth(150);
-        HBox hBox = new HBox(ed, name, grade,dob);
+        HBox hBox = new HBox(ed, name, grade, dob);
         hBox.setSpacing(30);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setId("heading");

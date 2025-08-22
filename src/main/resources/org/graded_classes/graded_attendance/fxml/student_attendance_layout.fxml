@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxWidth="400.0" minWidth="300.0" onMouseExited="#hide_search" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.StudentAttendance">
+<VBox alignment="CENTER" maxWidth="400.0" minWidth="300.0" onMouseExited="#hide_search" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.StudentAttendance">
    <children>
       <VBox id="search" fx:id="search_box" maxWidth="400.0" minWidth="300.0" stylesheets="@../css/list_view_style.css">
          <children>
@@ -27,7 +27,7 @@
                         <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button id="button-ok" alignment="CENTER_RIGHT" mnemonicParsing="false" stylesheets="@../css/nav-style.css" text="Check In">
+                  <Button id="button-ok" fx:id="checkIn_out" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#doAction" stylesheets="@../css/nav-style.css" text="Check In" visible="false">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

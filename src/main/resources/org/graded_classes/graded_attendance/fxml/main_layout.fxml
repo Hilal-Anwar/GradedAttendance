@@ -7,117 +7,122 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.MainController">
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.MainController">
    <children>
-        <AnchorPane id="root_back" stylesheets="@../css/style_main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <BorderPane fx:id="main_view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <VBox prefHeight="200.0" prefWidth="30.0" spacing="15.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="12.98" fitWidth="20.81" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/ed_logo.svg" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <HBox id="home" fx:id="selectedTab" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-color: #1C75BC; -fx-background-radius: 0 5 5 0;" VBox.vgrow="NEVER">
+      <AnchorPane>
+         <children>
+              <AnchorPane id="root_back" stylesheets="@../css/style_main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <BorderPane fx:id="main_view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <left>
+                  <VBox prefHeight="200.0" prefWidth="30.0" spacing="15.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="24.0" stroke="BLACK" strokeWidth="0.0" width="4.0" />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="12.98" fitWidth="20.81" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/home_in.svg" />
+                              <Image url="@../icons/ed_logo.svg" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+                           </VBox.margin>
                         </ImageView>
+                        <HBox id="home" fx:id="selectedTab" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-color: #1C75BC; -fx-background-radius: 0 5 5 0;" VBox.vgrow="NEVER">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="24.0" stroke="BLACK" strokeWidth="0.0" width="4.0" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/home_in.svg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox id="chat" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/chat.svg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox id="calender" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/calendar_month.svg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox id="database" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/database.svg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox id="database" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/account_balance.svg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="BOTTOM_CENTER" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/settings_n.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
+                           </padding>
+                        </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                     </padding>
-                  </HBox>
-                  <HBox id="chat" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/chat.svg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox id="calender" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/calendar_month.svg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox id="database" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/database.svg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                     </padding>
-                     <VBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox id="database" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" style="-fx-background-radius: 0 5 5 0;">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa00" height="24.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="4.0" />
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/account_balance.svg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="BOTTOM_CENTER" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../icons/settings_n.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="2.0" right="2.0" top="10.0" />
-                     </padding>
-                  </HBox>
-               </children>
-            </VBox>
-         </left>
-      </BorderPane>
-      <ModalPane fx:id="modalPane" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  </VBox>
+               </left>
+            </BorderPane>
+            <ModalPane fx:id="modalPane" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

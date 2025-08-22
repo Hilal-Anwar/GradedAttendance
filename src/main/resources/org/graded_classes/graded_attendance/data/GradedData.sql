@@ -1,15 +1,15 @@
 CREATE TABLE IF NOT EXISTS "StudentData"
 (
     ed_no TEXT PRIMARY KEY NOT NULL ,
-    date_of_add TEXT,
     name TEXT NOT NULL,
+    class TEXT,
+    date_of_add TEXT,
     email TEXT NOT NULL,
     bloodGroup TEXT,
     guardian_phone TEXT,
     aadhaar_no TEXT,
     father_name TEXT,
     mother_name TEXT,
-    class TEXT,
     gender TEXT,
     dob TEXT,
     address TEXT,
@@ -22,3 +22,6 @@ CREATE TABLE IF NOT EXISTS "StudentData"
     subjects TEXT,
     telegram_id TEXT
 );
+SELECT * FROM "StudentData"
+ORDER BY CAST(SUBSTR(ed_no, 3) AS INTEGER);
+

@@ -1,12 +1,5 @@
 package org.graded_classes.graded_attendance.data;
-/*
 
-Default path
-G:/My Drive/Graded/data/
-
- */
-
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,30 +15,26 @@ public class DatabaseLoader {
         this.name = name;
         init();
     }
-
+    public DatabaseLoader( String name) {
+        this("G:/My Drive/",name);
+        init();
+    }
     private void init() {
-        var done = create(root_path);
-        if (done) {
             try {
-                connection = DriverManager.getConnection("jdbc:sqlite:" + root_path + this.name);
+                connection = DriverManager.getConnection("jdbc:sqlite:" + root_path + this.name+".db");
+
                 System.out.println("Opened database successfully");
             } catch (SQLException e) {
                 System.err.println(e.getMessage());
-            }
         }
     }
 
-    private static boolean create(String root_path) {
-        if (!new File(root_path).exists())
-            return new File(root_path).mkdirs();
-        return false;
-    }
 
-    Connection getConnection() {
+    public Connection getConnection() {
         return connection;
     }
 
-    Statement getStatement() {
+    public Statement getStatement() {
         try {
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);

@@ -1,10 +1,5 @@
 package org.graded_classes.graded_attendance.data;
-/*
 
-Default path
-G:/My Drive/Graded/data/
-
- */
 
 public class GradedDataController {
     private final  String root_path="G:/My Drive/Graded/data/";

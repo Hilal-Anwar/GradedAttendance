@@ -3,7 +3,7 @@
     -fx-background-color: #fafafa;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
-    -fx-font-family: Gilroy-Medium;
+    -fx-font-family: "Helvetica";
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
 }
 
@@ -24,9 +24,11 @@
 #button-cancel {
     -fx-background-color: red;
     -fx-text-fill: white;
+    -fx-font-family: "Helvetica";
 }
 
 #button-ok {
     -fx-background-color: #1C75BC;
     -fx-text-fill: white;
+    -fx-font-family: "Helvetica";
 }

@@ -24,13 +24,6 @@ public record Student(String ed_no,
                       String suggestions,
                       String[] subjects,
                       String telegram_id) {
-   /* @Override
-    public String toString() {
-        return String.format(
-                "INSERT INTO \"StudentData\" (ed_no, name, email, bloodGroup, guardian_phone, aadhaar_no, father_name, mother_name, class, gender, dob, address, father_occ, mother_occ, previous_ins_name, reason_leaving, school_n, suggestions, subjects, telegram_id) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
-                ed_no, name, email, bloodGroup, guardian_phone, aadhaar_no, father_name, mother_name, _class, gender, dob, address, father_occ, mother_occ, previous_ins_name, reason_leaving, school_n, suggestions, String.join(", ", subjects), telegram_id
-        );
-    }*/
 
     public void insertIntoDatabase(Connection connection) throws SQLException {
         String sql = "INSERT INTO \"StudentData\"(ed_no, name,email, bloodGroup, guardian_phone, aadhaar_no, father_name, mother_name, class, gender, dob, address, father_occ, mother_occ, previous_ins_name, reason_leaving, school_n, suggestions, subjects, telegram_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -60,13 +53,5 @@ public record Student(String ed_no,
         }
     }
 
-  /*  public Student(String uid, String name, String aClass, String userId) {
-        this(uid, name, aClass, userId,
-                null, null, null,
-                null, null, null, null,
-                null, null, null,
-                null, null, null, null, null, null);
-
-    }*/
 
 }

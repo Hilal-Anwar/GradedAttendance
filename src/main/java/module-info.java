@@ -8,6 +8,11 @@ module org.graded_classes.graded_attendance {
     requires atlantafx.base;
     requires com.twelvemonkeys.common.image;
     requires org.apache.xmlgraphics.batik.transcoder;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.materialdesign2;
+    requires javafx.controls;
+    requires javafx.graphics;
+    requires javafx.base;
     exports org.graded_classes.graded_attendance;
     opens org.graded_classes.graded_attendance;
     opens org.graded_classes.graded_attendance.controller to javafx.fxml, javafx.graphics, org.xerial.sqlitejdbc, java.sql;

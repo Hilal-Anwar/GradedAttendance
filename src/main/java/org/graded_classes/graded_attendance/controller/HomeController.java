@@ -13,13 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.R;
-import org.graded_classes.graded_attendance.data.DataLoader;
+import org.graded_classes.graded_attendance.data.GradedDataLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,13 +37,13 @@ public class HomeController implements Initializable {
     AnchorPane home_tab_main_view;
     ModalPane modalPane;
     VBox dummy_box = new VBox();
-    DataLoader dataLoader;
+    GradedDataLoader gradedDataLoader;
     MainController mainController;
     GradedFxmlLoader gradedFxmlLoader = new GradedFxmlLoader();
 
-    public HomeController(ModalPane modalPane, DataLoader dataLoader, MainController mainController) {
+    public HomeController(ModalPane modalPane, GradedDataLoader gradedDataLoader, MainController mainController) {
         this.modalPane = modalPane;
-        this.dataLoader = dataLoader;
+        this.gradedDataLoader = gradedDataLoader;
         this.mainController = mainController;
     }
 

@@ -1,8 +1,13 @@
 package org.graded_classes.graded_attendance.controller;
 
 import atlantafx.base.controls.ModalPane;
+import atlantafx.base.controls.Notification;
+import atlantafx.base.util.Animations;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -10,14 +15,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.R;
-import org.graded_classes.graded_attendance.data.DataLoader;
 import org.graded_classes.graded_attendance.data.Formatter;
+import org.graded_classes.graded_attendance.data.GradedDataLoader;
+import org.graded_classes.graded_attendance.data.MessageSender;
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.materialdesign2.MaterialDesignH;
 
 import java.net.URL;
 import java.util.Map;
@@ -25,10 +36,12 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
+    public StackPane stackPane;
+    @FXML
     HBox selectedTab;
     Tooltip tooltip;
     Stage stage;
-    Node home, chat, calendar,account_and_balance;
+    Node home, chat, calendar, account_and_balance;
     Map<String, Image> toggleInImages = Map.of(
             "home", new Image(GradedResourceLoader.load("icons/home_in.svg")),
             "chat", new Image(GradedResourceLoader.load("icons/chat_in.svg")),
@@ -44,7 +57,7 @@ public class MainController implements Initializable {
     GradedFxmlLoader gradedFxmlLoader = new GradedFxmlLoader();
     @FXML
     BorderPane main_view;
-    public DataLoader dataLoader = new DataLoader();
+    public GradedDataLoader gradedDataLoader = new GradedDataLoader(this);
 
     public MainController(Stage stage) {
         this.stage = stage;
@@ -53,14 +66,17 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println(stackPane + " is the root view");
         home = gradedFxmlLoader.createView(R.home_layout, new HomeController(modalPane,
-                dataLoader, this));
+                gradedDataLoader, this));
         chat = gradedFxmlLoader.createView(R.chat_layout, new ChatController());
         calendar = gradedFxmlLoader.createView(R.calendar_layout, new CalenderController());
         //database = gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
+        new MessageSender(gradedDataLoader.databaseLoader, this);
+        System.out.println(stackPane.getChildren());
     }
 
     @FXML
@@ -84,7 +100,7 @@ public class MainController implements Initializable {
             case "chat" -> chat;
             case "calender" -> calendar;
             case "database" -> gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
-            case "account_and_balance"-> account_and_balance;
+            case "account_and_balance" -> account_and_balance;
             default -> null;
         };
     }
@@ -100,4 +116,24 @@ public class MainController implements Initializable {
         rectangle.setFill(Paint.valueOf("#fafafa00"));
         imageView.setImage(toggleOutImages.get(root.getId()));
     }
+
+    public void sendNotification(String message, String styles) {
+        var msg = new Notification(message, new FontIcon(MaterialDesignH.HELP_CIRCLE_OUTLINE));
+        msg.getStyleClass().add(styles);
+        msg.setPrefHeight(Region.USE_PREF_SIZE);
+        msg.setMaxHeight(Region.USE_PREF_SIZE);
+        StackPane.setAlignment(msg, Pos.TOP_RIGHT);
+        StackPane.setMargin(msg, new Insets(10, 10, 0, 0));
+        msg.setOnClose(_ -> {
+            var out = Animations.slideOutUp(msg, Duration.millis(250));
+            out.setOnFinished(_ -> stackPane.getChildren().remove(msg));
+            out.playFromStart();
+        });
+        var in = Animations.slideInDown(msg, Duration.millis(250));
+        if (!stackPane.getChildren().contains(msg)) {
+           stackPane.getChildren().addAll(msg);
+        }
+        in.playFromStart();
+    }
+
 }
