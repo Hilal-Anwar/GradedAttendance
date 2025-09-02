@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane id="container" fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.EditStudentData">
+   <content>
+      <VBox fx:id="formBox" spacing="10.0">
+         <children>
+            <Label text="Personal Details :">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <TextField fx:id="ed_no" editable="false" prefWidth="132.0" promptText="ED No." />
+                  <DatePicker fx:id="dob" prefWidth="190.0" promptText="Date of birth" />
+                  <ComboBox fx:id="gender" prefWidth="138.0" promptText="Gender" />
+                  <ComboBox fx:id="blood_group" prefWidth="157.0" promptText="Blood Group" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <TextField fx:id="first_name" promptText="First Name" />
+                  <TextField fx:id="last_name" promptText="Last Name" />
+                  <ComboBox fx:id="_class" prefWidth="150.0" promptText="Class" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <TextField fx:id="father_f_name" promptText="Father first Name" />
+                  <TextField fx:id="father_l_name" promptText="Father last Name" />
+                  <TextField fx:id="father_occ" promptText="Father's Occupation" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <TextField fx:id="mother_f_name" promptText="Mother first Name" />
+                  <TextField fx:id="mother_l_name" promptText="Mother last Name" />
+                  <TextField fx:id="mother_occ" promptText="Mother 's Occupation" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <TextField fx:id="aadhaar_no" prefWidth="283.0" promptText="Adahar No." />
+                  <TextField fx:id="email_id" prefWidth="271.0" promptText="Email" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <TextField fx:id="g_num" prefWidth="185.0" promptText="Guardian Phone No." />
+                  <TextField fx:id="school_n" prefWidth="282.0" promptText="School name" />
+                  <TextField fx:id="telegram_id" prefWidth="157.0" promptText="Telegram user Id" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <Label text="Other Detail :">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="address" prefHeight="200.0" prefWidth="200.0" promptText="Permanet Address" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <Label text="Subjects that you want select :">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+               <children>
+                  <CheckBox id="Physics" mnemonicParsing="false" onAction="#onSubjectSelection" text="Physics" />
+                  <CheckBox id="Chemistry" mnemonicParsing="false" onAction="#onSubjectSelection" text="Chemistry" />
+                  <CheckBox id="Biology" mnemonicParsing="false" onAction="#onSubjectSelection" text="Biology" />
+                  <CheckBox id="Math" mnemonicParsing="false" onAction="#onSubjectSelection" text="Math" />
+                  <CheckBox id="English" mnemonicParsing="false" onAction="#onSubjectSelection" text="English" />
+                  <CheckBox id="Hindi" mnemonicParsing="false" onAction="#onSubjectSelection" text="Hindi" />
+                  <CheckBox id="Computer" mnemonicParsing="false" onAction="#onSubjectSelection" text="Computer" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <CheckBox id="Accounts" mnemonicParsing="false" onAction="#onSubjectSelection" text="Accounts" />
+                  <CheckBox id="Economics" mnemonicParsing="false" onAction="#onSubjectSelection" text="Economics" />
+                  <CheckBox id="Social Studies" mnemonicParsing="false" onAction="#onSubjectSelection" text="Social Studies" />
+                  <CheckBox id="Business Studies" mnemonicParsing="false" onAction="#onSubjectSelection" text="Business Studies" />
+                  <CheckBox id="Commerce" mnemonicParsing="false" onAction="#onSubjectSelection" text="Commerce" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
