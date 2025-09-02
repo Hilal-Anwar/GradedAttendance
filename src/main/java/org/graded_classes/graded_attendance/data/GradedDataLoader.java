@@ -10,9 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 public class GradedDataLoader {
 
@@ -32,14 +30,11 @@ public class GradedDataLoader {
         try {
             databaseLoader.getStatement().execute("PRAGMA foreign_keys = ON;");
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/GradedData.sql").getQuery());
-            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Contact.sql").getQuery());
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/AbandonedEd.sql").getQuery());
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Attendance.sql").getQuery().
                     formatted("atte_" + monthName, "atte_" + monthName, "atte_" + monthName,
                             "atte_" + monthName, "atte_" + monthName, "atte_" + monthName, "atte_" + monthName));
-            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Fee.sql").getQuery().
-                    formatted("fee_" + monthName, "fee_" + monthName, "fee_" + monthName,
-                            "fee_" + monthName, "fee_" + monthName, "fee_" + monthName, "fee_" + monthName));
+            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Fee.sql").getQuery());
             loadData();
 
         } catch (SQLException e) {
@@ -75,7 +70,7 @@ public class GradedDataLoader {
         }
     }
 
-    private void addEdToAbandonedEd(String s) {
+    public void addEdToAbandonedEd(String s) {
 
 
         String sql = "INSERT INTO abandonedEd (ed_no) VALUES (?)";
@@ -89,7 +84,43 @@ public class GradedDataLoader {
             throw new RuntimeException(e);
         }
     }
+    public void removeEdFromAbandonedEd(String edNo) {
+        String sql = "DELETE FROM abandonedEd WHERE ed_no = ?";
 
+        try (PreparedStatement pst = databaseLoader.getConnection().prepareStatement(sql)) {
+            pst.setString(1, edNo);
+            int rowsAffected = pst.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("ed_no '" + edNo + "' removed successfully from abandonedEd.");
+            } else {
+                System.out.println("ed_no '" + edNo + "' not found in abandonedEd.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Failed to remove ed_no from abandonedEd: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public List<String> loadAbandonedEdNos() {
+        List<String> abandonedEdNos = new ArrayList<>();
+        String sql = "SELECT ed_no FROM abandonedEd";
+
+        try (PreparedStatement pst = databaseLoader.getConnection().prepareStatement(sql);
+             ResultSet rs = pst.executeQuery()) {
+
+            while (rs.next()) {
+                abandonedEdNos.add(rs.getString("ed_no"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error loading abandonedEd data: " + e.getMessage());
+        }
+
+        return abandonedEdNos;
+    }
 
     public void addStudent(Student student) {
         try {

@@ -184,11 +184,19 @@ public class StudentAttendance implements Initializable {
                 String updateSQL = "UPDATE \"" + tableName + "\" SET \"" + columnName + "\" = ? WHERE ed_no = ?";
                 PreparedStatement updateStmt = conn.prepareStatement(updateSQL);
                 String[] va = attendanceMap.get(edNo);
-                va[3] = val;
+                va[2] = val;
                 updateStmt.setString(1, Arrays.toString(va));
                 updateStmt.setString(2, edNo);
                 updateStmt.executeUpdate();
                 System.out.println("Updated column '" + columnName + "' for ed_no '" + edNo + "'.");
+                String msg = """
+                        🎉 Homework Completed!
+                        Dear Parent,
+                        Great news! Your child %s has successfully completed their homework for today.
+                        We’re proud of their effort and commitment to learning. Keep up the great work! 🌟
+                        """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name());
+                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
+                    mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -215,6 +223,14 @@ public class StudentAttendance implements Initializable {
                     updateStmt.setString(1, Arrays.toString(va));
                     attendanceMap.replace(edNo, va);
                     listViewStudents.attendanceDataView.update();
+                    String msg = """
+                            📍 Arrival Alert
+                            Dear Parent,
+                            Your child %s has safely arrived at their tuition center at %s.
+                            Thank you for trusting us with their learning journey! 😊
+                            """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
+                    if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
+                        mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
                     source.setText("Check Out");
                 } else if (source.getText().equals("Check Out")) {
                     va[1] = timeStamp;
@@ -222,6 +238,14 @@ public class StudentAttendance implements Initializable {
                     attendanceMap.replace(edNo, va);
                     source.setVisible(false);
                     listViewStudents.attendanceDataView.update();
+                    String msg = """
+                            🚶‍♂️ Departure Alert
+                            Dear Parent,
+                            Your child %s has just left the tuition center at %s.
+                            We hope they had a great learning experience today. See you next time! 😊
+                            """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
+                    if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
+                        mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
                 }
 
                 updateStmt.setString(2, edNo);

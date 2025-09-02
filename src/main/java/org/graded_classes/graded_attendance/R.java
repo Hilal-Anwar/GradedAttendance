@@ -11,6 +11,7 @@ public enum R {
     teaching_progress_layout("fxml/teaching_progress_layout.fxml"),
     database_layout("fxml/database_edit.fxml"),
     chat_layout("fxml/chat_layout.fxml"),
+    payment_done_animation("fxml/payment_done_animation.fxml"),
     calendar_layout("fxml/calendar_layout.fxml");
     private final String path;
 

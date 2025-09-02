@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="356.8" maxWidth="340.8" minHeight="356.8" minWidth="340.8" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1">
+    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Done" textAlignment="CENTER" wrappingWidth="239.41015625" StackPane.alignment="BOTTOM_CENTER">
+        <font>
+          <Font name="System Bold" size="32.0" />
+        </font>
+        <StackPane.margin>
+          <Insets bottom="30.0" />
+        </StackPane.margin>
+    </Text>
+    <ImageView fitHeight="315.0" fitWidth="315.0" preserveRatio="true" smooth="false" StackPane.alignment="CENTER">
+        <Image url="@../icons/payment_2.gif" />
+    </ImageView>
+</StackPane>

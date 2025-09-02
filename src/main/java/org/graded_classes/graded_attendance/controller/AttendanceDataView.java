@@ -1,15 +1,28 @@
 package org.graded_classes.graded_attendance.controller;
 
 import atlantafx.base.controls.ToggleSwitch;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import org.graded_classes.graded_attendance.data.Student;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 
 public class AttendanceDataView implements Initializable {
     @FXML
@@ -26,10 +39,12 @@ public class AttendanceDataView implements Initializable {
 
     @FXML
     private Label dueAmount;
-
     @FXML
-    private ToggleSwitch homeworkSwitch;
-
+    private Tab edit, info;
+    @FXML
+    public ToggleSwitch homeworkSwitch;
+    @FXML
+    TabPane tabPane;
     @FXML
     private Label lastPayment;
 
@@ -41,11 +56,11 @@ public class AttendanceDataView implements Initializable {
 
     @FXML
     private Label uId;
-
     @FXML
     private Label uName;
     StudentAttendance studentAttendance;
     String ed_no;
+    EditStudentData editStudentData;
 
     public AttendanceDataView(StudentAttendance studentAttendance, String ed_no) {
         this.studentAttendance = studentAttendance;
@@ -55,14 +70,34 @@ public class AttendanceDataView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         var x = studentAttendance.mainController.gradedDataLoader;
+
         Student student = x.getStudentData().get(ed_no);
         uId.setText(student.ed_no());
         uName.setText(firstLetterToUpperCase(student.name()));
         uClass.setText(student._class());
-        if (varify(studentAttendance.attendanceMap.get(ed_no)))
+        if (varify(studentAttendance.attendanceMap.get(ed_no))) {
             studentAttendance.checkIn_out.setVisible(true);
-        else {
-            update();
+            if (studentAttendance.attendanceMap.get(ed_no)[0] == null)
+                studentAttendance.checkIn_out.setText("Check In");
+            else if (studentAttendance.attendanceMap.get(ed_no)[1] == null)
+                studentAttendance.checkIn_out.setText("Check Out");
+        } else {
+            studentAttendance.checkIn_out.setVisible(false);
+        }
+        update();
+        edit.setOnSelectionChanged(event -> {
+            extracted();
+        });
+    }
+
+    private void extracted() {
+        var y = new FXMLLoader(loadURL("fxml/editData.fxml"));
+        editStudentData = new EditStudentData(studentAttendance.mainController.gradedDataLoader.getStudentData(), ed_no);
+        y.setControllerFactory(c -> editStudentData);
+        try {
+            edit.setContent(y.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -92,24 +127,53 @@ public class AttendanceDataView implements Initializable {
             c_out_status.setStyle("-fx-text-fill: #1C75BC;");
 
         }
-        if (x[1] != null && x[2] != null) {
+        if (x[0] != null && x[1] != null) {
             status.setText("Present");
             status.setStyle("-fx-text-fill: #1C75BC;");
+        }
+        if (x[2] != null ) {
+            homeworkSwitch.setSelected(true);
+            homeworkSwitch.setText("Submitted");
         }
 
     }
 
     @FXML
     void whenClicked(MouseEvent event) {
-            ToggleSwitch toggleSwitch= (ToggleSwitch) event.getSource();
-            if (toggleSwitch.isSelected()){
-                toggleSwitch.setText("Submitted");
-                studentAttendance.attendanceMap.get(ed_no)[3]="Submitted";
-            }
-            else {
-                toggleSwitch.setText("Not Submitted");
-                studentAttendance.attendanceMap.get(ed_no)[3]="Not Submitted";
+        if (homeworkSwitch.isSelected()) {
+            homeworkSwitch.setText("Submitted");
+            studentAttendance.attendanceMap.get(ed_no)[2] = "Submitted";
+        } else {
+            homeworkSwitch.setText("Not Submitted");
+            studentAttendance.attendanceMap.get(ed_no)[2] = "Not Submitted";
 
-            }
+        }
     }
+
+    @FXML
+    void onCancel(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onOK() {
+        if (info.isSelected()) {
+            if (!edit.isSelected()) {
+                if (homeworkSwitch.isSelected())
+                    studentAttendance.updateHomeWorkStatus("Submitted");
+                else
+                    studentAttendance.updateHomeWorkStatus("Not Submitted");
+            } else {
+                editStudentData.update(studentAttendance.mainController.gradedDataLoader.databaseLoader.getConnection());
+            }
+        } else if (edit.isSelected()) {
+            editStudentData.update(studentAttendance.mainController.gradedDataLoader.databaseLoader.getConnection());
+        }
+    }
+
+    @FXML
+    void viewReport(ActionEvent event) {
+    }
+
+
 }

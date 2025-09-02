@@ -41,23 +41,26 @@ public class MainController implements Initializable {
     HBox selectedTab;
     Tooltip tooltip;
     Stage stage;
-    Node home, chat, calendar, account_and_balance;
+    Node home, chat, calendar, lesson;
     Map<String, Image> toggleInImages = Map.of(
             "home", new Image(GradedResourceLoader.load("icons/home_in.svg")),
             "chat", new Image(GradedResourceLoader.load("icons/chat_in.svg")),
             "calender", new Image(GradedResourceLoader.load("icons/calendar_month_in.svg")),
-            "database", new Image(GradedResourceLoader.load("icons/database_in.svg")));
+            "database", new Image(GradedResourceLoader.load("icons/database_in.svg")),
+            "lesson", new Image(GradedResourceLoader.load("icons/book_in.svg")));
     Map<String, Image> toggleOutImages = Map.of(
             "home", new Image(GradedResourceLoader.load("icons/home.svg")),
             "chat", new Image(GradedResourceLoader.load("icons/chat.svg")),
             "calender", new Image(GradedResourceLoader.load("icons/calendar_month.svg")),
-            "database", new Image(GradedResourceLoader.load("icons/database.svg")));
+            "database", new Image(GradedResourceLoader.load("icons/database.svg")),
+            "lesson", new Image(GradedResourceLoader.load("icons/book.svg")));
     @FXML
     ModalPane modalPane;
     GradedFxmlLoader gradedFxmlLoader = new GradedFxmlLoader();
     @FXML
     BorderPane main_view;
     public GradedDataLoader gradedDataLoader = new GradedDataLoader(this);
+    MessageSender messageSender;
 
     public MainController(Stage stage) {
         this.stage = stage;
@@ -66,16 +69,14 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println(stackPane + " is the root view");
         home = gradedFxmlLoader.createView(R.home_layout, new HomeController(modalPane,
                 gradedDataLoader, this));
         chat = gradedFxmlLoader.createView(R.chat_layout, new ChatController());
         calendar = gradedFxmlLoader.createView(R.calendar_layout, new CalenderController());
-        //database = gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
-        new MessageSender(gradedDataLoader.databaseLoader, this);
+        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this);
         System.out.println(stackPane.getChildren());
     }
 
@@ -100,7 +101,7 @@ public class MainController implements Initializable {
             case "chat" -> chat;
             case "calender" -> calendar;
             case "database" -> gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
-            case "account_and_balance" -> account_and_balance;
+            case "lesson" -> lesson;
             default -> null;
         };
     }
@@ -131,7 +132,7 @@ public class MainController implements Initializable {
         });
         var in = Animations.slideInDown(msg, Duration.millis(250));
         if (!stackPane.getChildren().contains(msg)) {
-           stackPane.getChildren().addAll(msg);
+            stackPane.getChildren().addAll(msg);
         }
         in.playFromStart();
     }

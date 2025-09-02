@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label contentDisplay="TOP" text="Free Payment">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/teacher_payment_normal.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <TextField fx:id="ed_no" editable="false" maxWidth="200.0" promptText="ED No." />
+      <ComboBox fx:id="mode" maxWidth="200.0" promptText="Mode" />
+      <TextField fx:id="amount_to_pay" maxWidth="200.0" promptText="Amount to pay" />
+      <TextField fx:id="name_of_receiver" maxWidth="200.0" promptText="Recived By" />
+      <TextField fx:id="due_amount" maxWidth="200.0" promptText="Due Amount" />
+   </children>
+</VBox>

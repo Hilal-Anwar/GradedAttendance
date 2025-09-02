@@ -16,7 +16,9 @@ public class ListViewStudents implements Initializable {
     private ListView<HBox> list;
     StudentAttendance studentAttendance;
     String ed;
-    AttendanceDataView  attendanceDataView;
+    AttendanceDataView attendanceDataView;
+    String name;
+
     /* FilteredList<HBox> hBoxes;
      TextField search;
      GradedFxmlLoader gradedFxmlLoader;
@@ -49,7 +51,7 @@ public class ListViewStudents implements Initializable {
                     if (newValue != null) {
                         String id = newValue.getId();
                         ed = id.substring(0, id.indexOf(" "));
-                        String name = id.substring(id.indexOf(" ") + 1);
+                        name = id.substring(id.indexOf(" ") + 1);
                         studentAttendance.inputField.setText(name);
                         createCustomDataView(ed);
                         studentAttendance.hide_search();
@@ -58,9 +60,9 @@ public class ListViewStudents implements Initializable {
 
     }
 
-    private void createCustomDataView( String ed) {
+    private void createCustomDataView(String ed) {
         if (studentAttendance.id.equals("stu_atten")) {
-            attendanceDataView=new AttendanceDataView(this.studentAttendance,ed);
+            attendanceDataView = new AttendanceDataView(this.studentAttendance, ed);
             var attendance = studentAttendance.gradedFxmlLoader.createView(R.data_view, attendanceDataView);
             if (studentAttendance.outer_main_box.getChildren().size() > 3)
                 studentAttendance.outer_main_box.getChildren().set(studentAttendance.outer_main_box.getChildren().size() - 1, attendance);
@@ -69,7 +71,7 @@ public class ListViewStudents implements Initializable {
             VBox.setVgrow(attendance, Priority.ALWAYS);
         } else if (studentAttendance.id.equals("st_fee")) {
             var feeReport = studentAttendance.gradedFxmlLoader.createView(R.student_fee_layout,
-                    new StudentFeeLayout(studentAttendance.mainController.gradedDataLoader, ed));
+                    new StudentFeeLayout(studentAttendance.mainController, ed, name));
             if (studentAttendance.outer_main_box.getChildren().size() > 3)
                 studentAttendance.outer_main_box.getChildren().set(studentAttendance.outer_main_box.getChildren().size() - 1, feeReport);
             else

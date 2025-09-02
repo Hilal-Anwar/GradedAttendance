@@ -78,6 +78,8 @@ public class HomeController implements Initializable {
             toggleIn(vBox, "icons/teaching_progress.png");
             selectedItem = tea_prog;
         }
+        if (outer_main_box.getChildren().size() > 3)
+            outer_main_box.getChildren().removeLast();
         Node searchBox = getSearchView(vBox);
         if (searchBox != null) {
             if (!home_tab_main_view.getChildren().contains(searchBarHolder))
@@ -86,23 +88,15 @@ public class HomeController implements Initializable {
             AnchorPane.setRightAnchor(searchBox, 0.0);
             AnchorPane.setLeftAnchor(searchBox, 0.0);
             searchBarHolder.getChildren().set(searchBarHolder.getChildren().size() - 1, searchBox);
-        } else {
-            home_tab_main_view.getChildren().remove(searchBarHolder);
-            var x = new VBox(new Label("Coming soon"));
-            VBox.setVgrow(x, Priority.ALWAYS);
-            x.setAlignment(Pos.CENTER);
-            outer_main_box.getChildren().remove(dummy_box);
-            outer_main_box.getChildren().set(outer_main_box.getChildren().size() - 1, x);
         }
 
     }
 
 
-
     private Node getSearchView(VBox vBox) {
         return switch (vBox.getId()) {
-            case "stu_atten", "st_fee" -> gradedFxmlLoader.createView(R.student_attendance_layout,
-                    new StudentAttendance(mainController,gradedFxmlLoader,outer_main_box,vBox.getId()));
+            case "stu_atten", "st_fee", "tea_prog" -> gradedFxmlLoader.createView(R.student_attendance_layout,
+                    new StudentAttendance(mainController, gradedFxmlLoader, outer_main_box, vBox.getId()));
             case "tea_atten", "tea_fee" -> gradedFxmlLoader.createView(R.teacher_attendance_layout);
             default -> null;
         };
@@ -112,9 +106,9 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectedItem = stu_atten;
         VBox studentAttendanceLayout = (VBox) mainController.gradedFxmlLoader.createView(R.student_attendance_layout,
-                new StudentAttendance(mainController,gradedFxmlLoader,outer_main_box,"stu_atten"));
+                new StudentAttendance(mainController, gradedFxmlLoader, outer_main_box, "stu_atten"));
         dummy_box.setMinHeight(70);
-       // var data_viewer = gradedFxmlLoader.createView(R.data_view);
+        // var data_viewer = gradedFxmlLoader.createView(R.data_view);
         VBox.setVgrow(studentAttendanceLayout, Priority.ALWAYS);
         AnchorPane.setRightAnchor(studentAttendanceLayout, 0.0);
         AnchorPane.setLeftAnchor(studentAttendanceLayout, 0.0);

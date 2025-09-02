@@ -64,6 +64,7 @@ public class AddStudent implements Initializable {
             if (agree.isSelected()) {
                 System.out.println(studentInfo);
                 homeController.gradedDataLoader.addStudent(studentInfo);
+                homeController.gradedDataLoader.removeEdFromAbandonedEd(studentInfo.ed_no());
                 homeController.modalPane.hide();
             }
         } else if (button.getText().equals("Cancel")) {
@@ -112,17 +113,20 @@ public class AddStudent implements Initializable {
         if (homeController.gradedDataLoader.getStudentData().isEmpty())
             return "ED01";
         else if (abandonedEdPresent()){
-                return "";
+                var data=homeController.gradedDataLoader.loadAbandonedEdNos();
+                var abd=data.getFirst();
+                data.removeFirst();
+                return abd ;
+
         }
         else {
             var endKey = homeController.gradedDataLoader.getStudentData().lastEntry().getKey();
-            System.out.println(endKey);
             return generate(endKey);
         }
     }
 
     private boolean abandonedEdPresent() {
-        return false;
+        return !homeController.gradedDataLoader.loadAbandonedEdNos().isEmpty();
     }
 
     public String generate(String endKey) {
