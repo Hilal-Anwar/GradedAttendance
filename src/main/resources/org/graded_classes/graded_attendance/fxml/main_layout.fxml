@@ -108,7 +108,7 @@
                               <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox alignment="BOTTOM_CENTER" onMouseClicked="#navigation" prefWidth="200.0" spacing="2.0" VBox.vgrow="ALWAYS">
+                        <HBox id="setting" alignment="BOTTOM_CENTER" onMouseClicked="#onSetting" prefWidth="200.0" spacing="2.0" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
