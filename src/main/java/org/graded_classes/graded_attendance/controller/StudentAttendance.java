@@ -11,10 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
+import org.graded_classes.graded_attendance.GradedResourceLoader;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +31,8 @@ import java.util.*;
 import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 
 public class StudentAttendance implements Initializable {
+    @FXML
+    public ImageView searchCrossIcon;
     @FXML
     TextField inputField;
     VBox box;
@@ -57,8 +62,9 @@ public class StudentAttendance implements Initializable {
 
     private void init() {
         // Format today's date as a valid column name
+        System.out.println(searchCrossIcon);
         String columnName = LocalDate.now().toString();
-        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.UK);
+        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
         try (Statement stmt = mainController.gradedDataLoader.databaseLoader.getStatement()) {
 
             // Get existing columns
@@ -86,7 +92,6 @@ public class StudentAttendance implements Initializable {
 
                 attendanceMap.put(r.getString("ed_no"), getFromArray(r.getString(columnName)));
             }
-            System.out.println(attendanceMap);
 
         } catch (SQLException _) {
 
@@ -109,9 +114,15 @@ public class StudentAttendance implements Initializable {
     }
 
     @FXML
-    void input(KeyEvent event) {
+    void input() {
         String filter = inputField.getText();
-        if (filter == null || filter.isEmpty()) {
+        if(filter.isEmpty()){
+            searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/search.svg")));
+        }
+        else {
+            searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/close.svg")));
+        }
+        if (filter.isEmpty()) {
             filteredData.setPredicate(s -> true);
         } else {
             filteredData.setPredicate(s -> {
@@ -158,7 +169,7 @@ public class StudentAttendance implements Initializable {
     public void doAction(ActionEvent event) {
         Button source = (Button) event.getSource();
         String columnName = LocalDate.now().toString();
-        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.UK);
+        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
         updateAttendance(tableName, columnName, source);
     }
 
@@ -175,7 +186,7 @@ public class StudentAttendance implements Initializable {
         Connection conn = mainController.gradedDataLoader.databaseLoader.getConnection();
         String edNo = listViewStudents.ed;
         String columnName = LocalDate.now().toString();
-        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.UK);
+        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
         try (PreparedStatement checkStmt = conn.prepareStatement("SELECT 1 FROM " + tableName + " WHERE ed_no = ?")) {
             checkStmt.setString(1, edNo);
             ResultSet checkRs = checkStmt.executeQuery();
@@ -257,5 +268,11 @@ public class StudentAttendance implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void onCutOrSearch(MouseEvent mouseEvent) {
+        searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/search.svg")));
+        inputField.setText("");
     }
 }

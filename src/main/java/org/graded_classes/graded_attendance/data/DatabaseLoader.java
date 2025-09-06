@@ -1,5 +1,7 @@
 package org.graded_classes.graded_attendance.data;
 
+import javafx.scene.control.Alert;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,15 +19,16 @@ public class DatabaseLoader {
     }
     public DatabaseLoader( String name) {
         this("G:/My Drive/",name);
-        init();
     }
     private void init() {
             try {
                 connection = DriverManager.getConnection("jdbc:sqlite:" + root_path + this.name+".db");
-
                 System.out.println("Opened database successfully");
             } catch (SQLException e) {
-                System.err.println(e.getMessage());
+                var alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("You are not connected to the database please contact admin\nat graded");
+                alert.showAndWait();
         }
     }
 

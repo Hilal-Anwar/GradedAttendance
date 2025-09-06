@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Pagination?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import atlantafx.base.layout.DeckPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.TimeTableView">
-   <TableView fx:id="table_view" editable="true" layoutX="47.0" layoutY="54.0" prefHeight="278.0" prefWidth="508.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="54.0">
-      <columnResizePolicy>
-         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-      </columnResizePolicy>
-   </TableView>
-   <Pagination layoutX="200.0" layoutY="346.0" pageCount="6" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
-   <Label layoutX="281.0" layoutY="14.0" AnchorPane.leftAnchor="281.0" AnchorPane.rightAnchor="281.0" AnchorPane.topAnchor="10.0" />
-</AnchorPane>
+<BorderPane maxHeight="650.0" maxWidth="916.0" minHeight="650.0" minWidth="916.0" stylesheets="@../css/time_table.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.TimeTableClass">
+   <right>
+       <HBox fx:id="right_button" alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+           <ImageView fitHeight="48.0" fitWidth="48.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#right" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../icons/arrow_back.png" />
+           </ImageView>
+         <BorderPane.margin>
+            <Insets right="10.0" />
+         </BorderPane.margin>
+       </HBox>
+   </right>
+   <left>
+       <HBox fx:id="left_button" alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+           <ImageView fitHeight="64.0" fitWidth="48.0" onMouseClicked="#left" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../icons/arrow_back.png" />
+           </ImageView>
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin>
+       </HBox>
+   </left>
+   <center>
+      <DeckPane fx:id="deckPane" animationDuration="500.0ms" maxHeight="630.0" maxWidth="820.0" minHeight="630.0" minWidth="820.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

@@ -1,62 +1,20 @@
-CREATE TABLE  IF NOT EXISTS "TimeTable4&5"
+CREATE TABLE IF NOT EXISTS "TimeTable%s"
 (
-    [Day]    VARCHAR(512),
-    [3:00PM] VARCHAR(512),
-    [4:00PM] VARCHAR(512),
-    [5:00PM] VARCHAR(512),
-    [6:00PM] VARCHAR(512),
-    [7:00PM] VARCHAR(512),
-    [8:00PM] VARCHAR(512)
+    Day VARCHAR(512) PRIMARY KEY,
+    [3:00 PM] VARCHAR(512),
+    [4:00 PM] VARCHAR(512),
+    [5:00 PM] VARCHAR(512),
+    [6:00 PM] VARCHAR(512),
+    [7:00 PM] VARCHAR(512),
+    [8:00 PM] VARCHAR(512)
 );
+INSERT OR IGNORE INTO "TimeTable%s" (Day) VALUES
+                                              ('Mon'),
+                                              ('Tue'),
+                                              ('Wed'),
+                                              ('Thu'),
+                                              ('Fri'),
+                                              ('Sat'),
+                                              ('Sun');
 
 
-CREATE TABLE  IF NOT EXISTS "TimeTable6"
-(
-    [Day]    VARCHAR(512),
-    [3:00PM] VARCHAR(512),
-    [4:00PM] VARCHAR(512),
-    [5:00PM] VARCHAR(512),
-    [6:00PM] VARCHAR(512),
-    [7:00PM] VARCHAR(512),
-    [8:00PM] VARCHAR(512)
-);
-CREATE TABLE  IF NOT EXISTS "TimeTable7"
-(
-    [Day]    VARCHAR(512),
-    [3:00PM] VARCHAR(512),
-    [4:00PM] VARCHAR(512),
-    [5:00PM] VARCHAR(512),
-    [6:00PM] VARCHAR(512),
-    [7:00PM] VARCHAR(512),
-    [8:00PM] VARCHAR(512)
-);
-CREATE TABLE  IF NOT EXISTS "TimeTable8"
-(
-    [Day]    VARCHAR(512),
-    [3:00PM] VARCHAR(512),
-    [4:00PM] VARCHAR(512),
-    [5:00PM] VARCHAR(512),
-    [6:00PM] VARCHAR(512),
-    [7:00PM] VARCHAR(512),
-    [8:00PM] VARCHAR(512)
-);
-CREATE TABLE  IF NOT EXISTS "TimeTable9"
-(
-    [Day]    VARCHAR(512),
-    [3:00PM] VARCHAR(512),
-    [4:00PM] VARCHAR(512),
-    [5:00PM] VARCHAR(512),
-    [6:00PM] VARCHAR(512),
-    [7:00PM] VARCHAR(512),
-    [8:00PM] VARCHAR(512)
-);
-CREATE TABLE  IF NOT EXISTS "TimeTable10"
-(
-    [Day]    VARCHAR(512),
-    [3:00PM] VARCHAR(512),
-    [4:00PM] VARCHAR(512),
-    [5:00PM] VARCHAR(512),
-    [6:00PM] VARCHAR(512),
-    [7:00PM] VARCHAR(512),
-    [8:00PM] VARCHAR(512)
-);

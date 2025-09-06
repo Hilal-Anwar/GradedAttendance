@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
@@ -150,9 +151,12 @@ public class HomeController implements Initializable {
 
     @FXML
     public void onButtonPressed(ActionEvent actionEvent) {
-        AnchorPane dialog = null;
+        BorderPane dialog = null;
         try {
-            dialog = FXMLLoader.load(loadURL("fxml/time_table_classes.fxml"));
+            javafx.fxml.FXMLLoader fxmlLoader = new FXMLLoader(loadURL("fxml/time_table_classes.fxml"));
+            var time=new TimeTableClass(this);
+            fxmlLoader.setControllerFactory(c -> time);
+            dialog = fxmlLoader.load();
             dialog.setStyle("-fx-background-color: #fafafa;");
         } catch (IOException e) {
             throw new RuntimeException(e);

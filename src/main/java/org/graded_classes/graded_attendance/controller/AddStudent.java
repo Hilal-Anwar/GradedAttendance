@@ -62,7 +62,6 @@ public class AddStudent implements Initializable {
         if (button.getText().equals("Apply")) {
             var studentInfo = getStudent();
             if (agree.isSelected()) {
-                System.out.println(studentInfo);
                 homeController.gradedDataLoader.addStudent(studentInfo);
                 homeController.gradedDataLoader.removeEdFromAbandonedEd(studentInfo.ed_no());
                 homeController.modalPane.hide();

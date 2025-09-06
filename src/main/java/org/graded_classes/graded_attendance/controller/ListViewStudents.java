@@ -3,9 +3,11 @@ package org.graded_classes.graded_attendance.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.R;
 
 import java.net.URL;
@@ -18,24 +20,6 @@ public class ListViewStudents implements Initializable {
     String ed;
     AttendanceDataView attendanceDataView;
     String name;
-
-    /* FilteredList<HBox> hBoxes;
-     TextField search;
-     GradedFxmlLoader gradedFxmlLoader;
-     VBox outer_main_box;
-     String id;
-     MainController homeController;
-     String ed;
- */
-  /*  public ListViewStudents(FilteredList<HBox> hBoxes, TextField search, GradedFxmlLoader gradedFxmlLoader, VBox outer_main_box, String id, MainController homeController) {
-        this.hBoxes = hBoxes;
-        this.search = search;
-        this.gradedFxmlLoader = gradedFxmlLoader;
-        this.outer_main_box = outer_main_box;
-        this.id = id;
-        this.homeController = homeController;
-    }
-*/
     public ListViewStudents(StudentAttendance studentAttendance) {
         this.studentAttendance = studentAttendance;
     }
@@ -53,6 +37,7 @@ public class ListViewStudents implements Initializable {
                         ed = id.substring(0, id.indexOf(" "));
                         name = id.substring(id.indexOf(" ") + 1);
                         studentAttendance.inputField.setText(name);
+                        studentAttendance.searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/close.svg")));
                         createCustomDataView(ed);
                         studentAttendance.hide_search();
                     }

@@ -14,12 +14,12 @@
          <children>
             <HBox alignment="CENTER" minWidth="300.0" spacing="5.0">
                <children>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="searchCrossIcon" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#onCutOrSearch" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                      <image>
-                        <Image url="@../icons/search.png" />
+                        <Image url="@../icons/search.svg" />
                      </image>
                   </ImageView>
                   <TextField fx:id="inputField" maxWidth="1.7976931348623157E308" minWidth="150.0" onKeyPressed="#input" onKeyTyped="#input" onMouseClicked="#show_search" promptText="ED No. or Name" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">

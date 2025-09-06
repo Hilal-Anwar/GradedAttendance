@@ -1,8 +1,6 @@
 package org.graded_classes.graded_attendance.controller;
 
 import atlantafx.base.controls.ToggleSwitch;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,16 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
+import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.data.Student;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
@@ -70,7 +65,6 @@ public class AttendanceDataView implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         var x = studentAttendance.mainController.gradedDataLoader;
-
         Student student = x.getStudentData().get(ed_no);
         uId.setText(student.ed_no());
         uName.setText(firstLetterToUpperCase(student.name()));
@@ -85,7 +79,7 @@ public class AttendanceDataView implements Initializable {
             studentAttendance.checkIn_out.setVisible(false);
         }
         update();
-        edit.setOnSelectionChanged(event -> {
+        edit.setOnSelectionChanged(_ -> {
             extracted();
         });
     }
@@ -102,7 +96,7 @@ public class AttendanceDataView implements Initializable {
     }
 
     private boolean varify(String[] s) {
-        return s[0] == null || s[1] == null;
+        return s == null || (s[0] == null || s[1] == null);
     }
 
     public static String firstLetterToUpperCase(String s) {
@@ -114,26 +108,28 @@ public class AttendanceDataView implements Initializable {
 
     public void update() {
         var x = studentAttendance.attendanceMap.get(ed_no);
-        if (x[0] != null) {
-            checkInTime.setText(x[0]);
-            c_in_status.setText("Message sent");
-            checkInTime.setStyle("-fx-text-fill: #1C75BC;");
-            c_in_status.setStyle("-fx-text-fill: #1C75BC;");
-        }
-        if (x[1] != null) {
-            checkOutTime.setText(x[1]);
-            c_out_status.setText("Message sent");
-            checkOutTime.setStyle("-fx-text-fill: #1C75BC;");
-            c_out_status.setStyle("-fx-text-fill: #1C75BC;");
+        if (x != null) {
+            if (x[0] != null) {
+                checkInTime.setText(x[0]);
+                c_in_status.setText("Message sent");
+                checkInTime.setStyle("-fx-text-fill: #1C75BC;");
+                c_in_status.setStyle("-fx-text-fill: #1C75BC;");
+            }
+            if (x[1] != null) {
+                checkOutTime.setText(x[1]);
+                c_out_status.setText("Message sent");
+                checkOutTime.setStyle("-fx-text-fill: #1C75BC;");
+                c_out_status.setStyle("-fx-text-fill: #1C75BC;");
 
-        }
-        if (x[0] != null && x[1] != null) {
-            status.setText("Present");
-            status.setStyle("-fx-text-fill: #1C75BC;");
-        }
-        if (x[2] != null ) {
-            homeworkSwitch.setSelected(true);
-            homeworkSwitch.setText("Submitted");
+            }
+            if (x[0] != null && x[1] != null) {
+                status.setText("Present");
+                status.setStyle("-fx-text-fill: #1C75BC;");
+            }
+            if (x[2] != null) {
+                homeworkSwitch.setSelected(true);
+                homeworkSwitch.setText("Submitted");
+            }
         }
 
     }
@@ -151,7 +147,10 @@ public class AttendanceDataView implements Initializable {
     }
 
     @FXML
-    void onCancel(ActionEvent event) {
+    void onCancel() {
+        studentAttendance.outer_main_box.getChildren().removeLast();
+        studentAttendance.inputField.setText("");
+        studentAttendance.searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/search.svg")));
 
     }
 

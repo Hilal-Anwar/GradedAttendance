@@ -6,6 +6,5 @@ import javafx.scene.input.KeyEvent;
 public class TeacherAttendance {
     @FXML
     void input(KeyEvent event) {
-        System.out.println(event.getText()+"fdfggfg");
     }
 }

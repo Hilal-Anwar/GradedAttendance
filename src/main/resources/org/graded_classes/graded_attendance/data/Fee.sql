@@ -11,7 +11,7 @@ create TABLE IF not exists "fee_2025"
     Jun   TEXT,
     Jul   TEXT,
     Aug   TEXT,
-    Sept  TEXT,
+    Sep  TEXT,
     Oct   TEXT,
     Nov   TEXT,
     Dec   TEXT,

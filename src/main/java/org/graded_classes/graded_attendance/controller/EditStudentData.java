@@ -10,6 +10,7 @@ import org.graded_classes.graded_attendance.data.Student;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
@@ -92,11 +93,11 @@ public class EditStudentData implements Initializable {
             email_id.setText(studentData.get(edNumber).email());
         if (studentData.get(edNumber).guardian_phone() != null)
             g_num.setText(studentData.get(edNumber).guardian_phone());
-        var v = studentData.get(edNumber).subjects()[0].split(",");
-
+        var v = studentData.get(edNumber).subjects();
         for (var s : v) {
             var x = (CheckBox) formBox.lookup("#" + s);
-            x.setSelected(true);
+            if (x != null)
+                x.setSelected(true);
             list_of_subjects.add(s);
         }
     }
@@ -132,7 +133,7 @@ public class EditStudentData implements Initializable {
         student.setFather_occ(father_occ.getText());
         student.setMother_occ(mother_occ.getText());
         student.setSchool_n(school_n.getText());
-        student.setSubjects(list_of_subjects.toArray(new String[]{}));
+        student.setSubjects(list_of_subjects.toArray(new String[0]));
         student.setTelegram_id(telegram_id.getText());
         student.updateAll(connection);
     }

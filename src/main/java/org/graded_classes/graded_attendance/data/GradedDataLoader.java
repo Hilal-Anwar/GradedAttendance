@@ -25,7 +25,7 @@ public class GradedDataLoader {
 
     public GradedDataLoader(MainController mainController) {
         this.mainController = mainController;
-        String monthName = today.getMonth().getDisplayName(TextStyle.SHORT, Locale.UK);
+        String monthName = today.getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
         databaseLoader = new DatabaseLoader("Graded_" + today.getYear());
         try {
             databaseLoader.getStatement().execute("PRAGMA foreign_keys = ON;");
@@ -35,6 +35,10 @@ public class GradedDataLoader {
                     formatted("atte_" + monthName, "atte_" + monthName, "atte_" + monthName,
                             "atte_" + monthName, "atte_" + monthName, "atte_" + monthName, "atte_" + monthName));
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Fee.sql").getQuery());
+            for (int i = 4; i <=10 ; i++) {
+                databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/TimeTable.sql").getQuery().formatted(i,i));
+
+            }
             loadData();
 
         } catch (SQLException e) {
@@ -71,8 +75,6 @@ public class GradedDataLoader {
     }
 
     public void addEdToAbandonedEd(String s) {
-
-
         String sql = "INSERT INTO abandonedEd (ed_no) VALUES (?)";
         try (PreparedStatement pst = databaseLoader.getConnection().prepareStatement(sql)) {
             pst.setString(1, s);
