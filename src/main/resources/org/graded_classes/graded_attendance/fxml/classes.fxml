@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+
+<TilePane hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="org.graded_classes.graded_attendance.planner.Classes">
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #66c5cc;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="I">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #f6cf71;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="II">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #f89c74;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="III">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #dcb0f2;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="IV">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #87c55f;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="V">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #9eb9f3;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="VI">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #fe88b1;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="VII">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #c9db74;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="VIII">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #8be0a4;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="IX">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #b497e7;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="X">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #b3b3b3;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="XI">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0"
+               onMouseClicked="#onClassSelected" prefHeight="120.0" prefWidth="120.0"
+               style="-fx-background-color: #ccff99;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="class-name" text="XII">
+              <font>
+                  <Font name="AvenirNextLTPro-Bold" size="41.0"/>
+              </font>
+          </Label>
+        </children>
+    </StackPane>
+</TilePane>

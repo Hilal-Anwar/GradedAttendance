@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+
+<TilePane hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.planner.Subject">
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ffccff;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="English" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ff99cc;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Math" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #cc99ff;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Hindi" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ccccff;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Computer" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ffffcc;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Physics" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ffcc99;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Chemistry" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ffcccc;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Biology" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #99ffcc;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Social Studies" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #99ccff;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Account" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ccffff;" stylesheets="@../css/tile_style.css">
+        <Label id="subject-name" text="Economics" textAlignment="CENTER" wrapText="true" />
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ccffcc;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="subject-name" text="Business Studies" textAlignment="CENTER" wrapText="true" />
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #ccff99;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="subject-name" text="Commerce" textAlignment="CENTER" wrapText="true" />
+        </children>
+    </StackPane>
+    <StackPane id="base" maxHeight="84.0" maxWidth="152.0" minHeight="84.0" minWidth="152.0" onMouseClicked="#createLessons" prefHeight="84.0" prefWidth="152.0" style="-fx-background-color: #b3b3b3;" stylesheets="@../css/tile_style.css">
+        <children>
+          <Label id="subject-name" text="GK/IQ" textAlignment="CENTER" wrapText="true" />
+        </children>
+    </StackPane>
+</TilePane>

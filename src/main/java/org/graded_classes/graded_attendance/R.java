@@ -12,7 +12,13 @@ public enum R {
     database_layout("fxml/database_edit.fxml"),
     chat_layout("fxml/chat_layout.fxml"),
     payment_done_animation("fxml/payment_done_animation.fxml"),
-    calendar_layout("fxml/calendar_layout.fxml");
+    calendar_layout("fxml/calendar_layout.fxml"),
+    lesson_planner("fxml/lesson_planner.fxml"),
+    classes("fxml/classes.fxml"),
+    subject("fxml/subjects.fxml"),
+    add_lesson("fxml/add_lesson.fxml"),
+    add_subtopic("fxml/add_subtopic.fxml"),
+    create_topic("fxml/topics_creator.fxml");
     private final String path;
 
     R(String path) {

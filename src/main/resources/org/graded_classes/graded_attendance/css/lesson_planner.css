@@ -1,0 +1,64 @@
+#card {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Gilroy-Bold';
+    -fx-background-color: #ffffff;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+#heading, #sub-heading {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Gilroy-Bold';
+}
+
+#add {
+    -fx-background-color: #1C75BC;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-text-fill: #fafafa;
+}
+
+#add:pressed {
+    -fx-opacity: 0.7;
+}
+
+#delete-button {
+    -fx-padding: 8px;
+    -fx-content-display: graphic-only;
+    -fx-effect: none;
+    -fx-background-color: transparent;
+}
+
+#delete-button:pressed {
+    -fx-background-color: rgba(255, 0, 0, 0.1);
+}
+
+#list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+#sub-topic-item {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Gilroy-Bold';
+    -fx-background-color: #ffffff;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.breadcrumbs {
+    -fx-font-size: 30px;
+    -fx-font-family: 'Gilroy-Bold';
+}
+
+.breadcrumbs > .button, flat > .hyperlink {
+    -fx-underline: false;
+}
+
+.breadcrumbs > .label.divider {
+    -fx-font-size: 30px;
+}

@@ -1,0 +1,19 @@
+#base{
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#base #class-name{
+    -fx-font-size: 36px;
+}
+#base .label{
+    -fx-font-size: 20px;
+    -fx-font-family: 'Gilroy-Bold';
+}
+#base:hover{
+    -fx-opacity: 0.8;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 3, 0.12, 0, 0);
+}
+#base:pressed{
+    -fx-opacity: 0.5;
+}

@@ -15,6 +15,7 @@ import org.graded_classes.graded_attendance.data.Student;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
@@ -73,7 +74,7 @@ public class AttendanceDataView implements Initializable {
             studentAttendance.checkIn_out.setVisible(true);
             if (studentAttendance.attendanceMap.get(ed_no)[0] == null)
                 studentAttendance.checkIn_out.setText("Check In");
-            else if (studentAttendance.attendanceMap.get(ed_no)[1] == null)
+            else if (studentAttendance.attendanceMap.get(ed_no)[1] == null||studentAttendance.attendanceMap.get(ed_no)[1].contains("null"))
                 studentAttendance.checkIn_out.setText("Check Out");
         } else {
             studentAttendance.checkIn_out.setVisible(false);
@@ -96,7 +97,7 @@ public class AttendanceDataView implements Initializable {
     }
 
     private boolean varify(String[] s) {
-        return s == null || (s[0] == null || s[1] == null);
+        return s[0] == null || s[1] == null || s[0].contains("null") || s[1].contains("null");
     }
 
     public static String firstLetterToUpperCase(String s) {

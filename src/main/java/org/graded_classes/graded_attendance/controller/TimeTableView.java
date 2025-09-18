@@ -62,13 +62,9 @@ public class TimeTableView extends TimeTable implements Initializable {
         String listKey = event.getTableView().getItems().get(event.getTablePosition().getRow()).get("Day").toString();
         String object = "";
         Map<String, Object> timeSlot = table.get(listKey);
-        if (key.equals("3:00 PM")) {
-            object = event.getNewValue();
-            timeSlot.put(key, object);
-            updateTimeSlot(listKey, key, object);
-        } else {
-            throw new IllegalStateException("Unexpected value: " + key);
-        }
+        object = event.getNewValue();
+        timeSlot.put(key, object);
+        updateTimeSlot(listKey, key, object);
         event.getTableView().getItems().get(event.getTablePosition().getRow()).put(key, object);
 
 

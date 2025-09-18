@@ -3,18 +3,19 @@ package org.graded_classes.graded_attendance.controller;
 import atlantafx.base.controls.ModalPane;
 import atlantafx.base.controls.Notification;
 import atlantafx.base.util.Animations;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -74,7 +75,7 @@ public class MainController implements Initializable {
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
-        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this);
+        //messageSender = new MessageSender(gradedDataLoader.databaseLoader, this);
     }
 
     @FXML
@@ -98,7 +99,7 @@ public class MainController implements Initializable {
             case "chat" -> chat;
             case "calender" -> calendar;
             case "database" -> gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
-            case "lesson" -> lesson;
+            case "lesson" -> gradedFxmlLoader.createView(R.lesson_planner);
             default -> null;
         };
     }

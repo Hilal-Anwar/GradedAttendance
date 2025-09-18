@@ -13,7 +13,7 @@ import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 public class GradedFxmlLoader {
 
 
-    public Node createView(R path) {
+    public  Node createView(R path) {
         Node parent;
         try {
             parent = new FXMLLoader(loadURL(path.getPath())).load();

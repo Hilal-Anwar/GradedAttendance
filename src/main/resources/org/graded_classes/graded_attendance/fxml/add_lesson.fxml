@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.controls.CustomTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane alignment="TOP_LEFT" prefHeight="248.0" prefWidth="678.0" stylesheets="@../css/lesson_planner.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.planner.Lesson">
+    <VBox spacing="5.0">
+        <Label text="Math">
+            <VBox.margin>
+                <Insets left="10.0" top="10.0" />
+            </VBox.margin>
+            <font>
+                <Font name="☞Gilroy-Bold" size="36.0" />
+            </font>
+        </Label>
+        <VBox id="card">
+            <VBox.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+            <Label id="sub-heading" text="Add Topic">
+                <VBox.margin>
+                    <Insets bottom="12.0" left="16.0" top="12.0" />
+                </VBox.margin>
+            </Label>
+            <HBox spacing="15.0">
+                <padding>
+                    <Insets left="24.0" top="5.0" />
+                </padding>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <CustomTextField fx:id="topic" maxHeight="36.0" prefHeight="36.0" prefWidth="497.0" promptText="Topic" />
+                <Button id="add" mnemonicParsing="false" onAction="#addSubtopic" text="Add">
+                    <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../icons/add.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+        </VBox>
+        <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" />
+            </VBox.margin>
+            <VBox fx:id="viewBox" />
+        </ScrollPane>
+    </VBox>
+</StackPane>

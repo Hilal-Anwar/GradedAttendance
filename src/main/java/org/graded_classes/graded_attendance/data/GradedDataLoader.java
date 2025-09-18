@@ -136,7 +136,7 @@ public class GradedDataLoader {
     }
 
     private void loadData() throws SQLException {
-        try (ResultSet rs = databaseLoader.getStatement().executeQuery("select * from StudentData")) {
+        try (ResultSet rs = databaseLoader.getStatement().executeQuery("SELECT * FROM StudentData ORDER BY ed_no ASC;select * from StudentData")) {
             while (rs.next()) {
                 studentData.put(rs.getString("ed_no"), new Student(
                         rs.getString("ed_no"),
