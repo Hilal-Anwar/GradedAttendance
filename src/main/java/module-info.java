@@ -13,6 +13,7 @@ module org.graded_classes.graded_attendance {
     requires javafx.controls;
     requires javafx.graphics;
     requires javafx.base;
+    requires hk2.api;
 
     opens org.graded_classes.graded_attendance.controller to javafx.fxml, javafx.graphics, org.xerial.sqlitejdbc, java.sql;
     opens org.graded_classes.graded_attendance.planner to javafx.fxml;

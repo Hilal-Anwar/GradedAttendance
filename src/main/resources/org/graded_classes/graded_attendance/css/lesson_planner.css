@@ -33,6 +33,16 @@
 #delete-button:pressed {
     -fx-background-color: rgba(255, 0, 0, 0.1);
 }
+#edit-button {
+    -fx-padding: 8px;
+    -fx-content-display: graphic-only;
+    -fx-effect: none;
+    -fx-background-color: transparent;
+}
+
+#edit-button:pressed {
+    -fx-background-color: rgba(55, 151, 24, 0.1);
+}
 
 #list-view {
     -fx-background-color: #ffffff;
@@ -42,12 +52,8 @@
 }
 
 #sub-topic-item {
-    -fx-font-size: 14px;
-    -fx-font-family: 'Gilroy-Bold';
     -fx-background-color: #ffffff;
     -fx-border-color: rgba(0, 0, 0, 0.2);
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
 }
 
 .breadcrumbs {

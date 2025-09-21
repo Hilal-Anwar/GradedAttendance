@@ -11,18 +11,21 @@ import java.util.ResourceBundle;
 
 public class Subject implements Initializable {
     Planner planner;
-    public Subject(Planner planner) {
+    String className;
+    public Subject(Planner planner,String className) {
         this.planner = planner;
+        this.className = className;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 
     public void createLessons(MouseEvent mouseEvent) {
         Label label = (Label) ((StackPane) mouseEvent.getSource()).lookup("#subject-name");
         planner.root.setValue(label.getText());
         planner.breadCrumb.setSelectedCrumb(planner.getTreeItemByIndex(planner.root,0));
-        planner.div.setContent(planner.createView(R.add_lesson,new Lesson(planner)));
+        planner.div.setContent(planner.createView(R.add_lesson,new Lesson(planner,label.getText(),className)));
     }
 }

@@ -35,6 +35,8 @@ public class GradedDataLoader {
                     formatted("atte_" + monthName, "atte_" + monthName, "atte_" + monthName,
                             "atte_" + monthName, "atte_" + monthName, "atte_" + monthName, "atte_" + monthName));
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Fee.sql").getQuery());
+            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/LessonPlanner.sql").getQuery());
+            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/TopicAndSubtopic.sql").getQuery());
             for (int i = 4; i <=10 ; i++) {
                 databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/TimeTable.sql").getQuery().formatted(i,i));
 

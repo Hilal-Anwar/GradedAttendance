@@ -26,6 +26,7 @@ import org.graded_classes.graded_attendance.R;
 import org.graded_classes.graded_attendance.data.Formatter;
 import org.graded_classes.graded_attendance.data.GradedDataLoader;
 import org.graded_classes.graded_attendance.data.MessageSender;
+import org.graded_classes.graded_attendance.planner.Planner;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignH;
 
@@ -75,7 +76,7 @@ public class MainController implements Initializable {
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
-        //messageSender = new MessageSender(gradedDataLoader.databaseLoader, this);
+        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this);
     }
 
     @FXML
@@ -99,7 +100,7 @@ public class MainController implements Initializable {
             case "chat" -> chat;
             case "calender" -> calendar;
             case "database" -> gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
-            case "lesson" -> gradedFxmlLoader.createView(R.lesson_planner);
+            case "lesson" -> gradedFxmlLoader.createView(R.lesson_planner,new Planner(gradedDataLoader));
             default -> null;
         };
     }

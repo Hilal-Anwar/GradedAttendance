@@ -16,9 +16,9 @@ public class Classes {
     @FXML
     public void onClassSelected(MouseEvent mouseEvent) {
         Label label = (Label) ((StackPane) mouseEvent.getSource()).lookup("#class-name");
-        System.out.println(label.getText());
-        planner.breadCrumb.setSelectedCrumb(planner.getTreeItemByIndex(planner.root,1));
-        planner.subjectView=planner.createView(R.subject,new Subject(planner));
+        planner.breadCrumb.getSelectedCrumb().setValue(planner.breadCrumb.getSelectedCrumb().getValue()+" ("+label.getText()+")");
+        planner.breadCrumb.setSelectedCrumb(planner.getTreeItemByIndex(planner.root, 1));
+        planner.subjectView = planner.createView(R.subject, new Subject(planner,label.getText()));
         planner.div.setContent(planner.subjectView);
     }
 }

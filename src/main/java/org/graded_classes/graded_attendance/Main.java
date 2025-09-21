@@ -2,7 +2,6 @@ package org.graded_classes.graded_attendance;
 
 import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +17,7 @@ Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GradedResourceLoader.loadURL("fxml/main_layout.fxml"));
-        fxmlLoader.setControllerFactory(c -> new MainController(stage));
+        fxmlLoader.setControllerFactory(_ -> new MainController(stage));
         Parent root = fxmlLoader.load();
         var scene = new Scene(root);
         stage.setTitle("Graded Management");

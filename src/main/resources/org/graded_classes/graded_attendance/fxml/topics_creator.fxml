@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane expanded="false" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.planner.TopicCreator">
+<TitledPane fx:id="titledPane" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.planner.TopicCreator">
    <content>
-      <VBox stylesheets="@../css/lesson_planner.css">
+      <VBox>
          <children>
-            <VBox id="card">
+            <VBox id="card" stylesheets="@../css/lesson_planner.css">
                <children>
                   <HBox>
                      <children>
@@ -24,7 +24,16 @@
                               <Label id="heading" text="Add Subtopic" />
                            </children>
                         </HBox>
-                        <Button id="delete-button" mnemonicParsing="false">
+                        <Button id="edit-button" mnemonicParsing="false" onAction="#removeTopic">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/edit_green.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="delete-button" mnemonicParsing="false" onAction="#editTopic">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -37,8 +46,8 @@
                   </HBox>
                   <HBox spacing="15.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <CustomTextField maxHeight="36.0" prefHeight="36.0" prefWidth="497.0" promptText="Subtopic" />
-                        <Button id="add" mnemonicParsing="false" text="Add">
+                        <CustomTextField fx:id="subtopicName" maxHeight="36.0" prefHeight="36.0" prefWidth="497.0" promptText="Subtopic" />
+                        <Button id="add" mnemonicParsing="false" onAction="#addSubTopic" text="Add">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -63,7 +72,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </VBox>
-            <ListView id="list-view" minHeight="400.0" VBox.vgrow="ALWAYS">
+            <ListView id="list-view" fx:id="subtopicListView" minHeight="200.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" />
                </VBox.margin>

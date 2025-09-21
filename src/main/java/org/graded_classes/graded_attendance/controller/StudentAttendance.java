@@ -1,5 +1,6 @@
 package org.graded_classes.graded_attendance.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -27,6 +28,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.*;
+import java.util.concurrent.Executors;
 
 import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 
@@ -116,10 +118,9 @@ public class StudentAttendance implements Initializable {
     @FXML
     void input() {
         String filter = inputField.getText();
-        if(filter.isEmpty()){
+        if (filter.isEmpty()) {
             searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/search.svg")));
-        }
-        else {
+        } else {
             searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/close.svg")));
         }
         if (filter.isEmpty()) {
@@ -170,7 +171,10 @@ public class StudentAttendance implements Initializable {
         Button source = (Button) event.getSource();
         String columnName = LocalDate.now().toString();
         String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
-        updateAttendance(tableName, columnName, source);
+        if (!inputField.getText().isEmpty()) {
+            updateAttendance(tableName, columnName, source);
+        }
+
     }
 
     private String[] getFromArray(String string) {
@@ -206,8 +210,14 @@ public class StudentAttendance implements Initializable {
                         Great news! Your child %s has successfully completed their homework for today.
                         We’re proud of their effort and commitment to learning. Keep up the great work! 🌟
                         """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name());
-                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
-                    mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
+                    try {
+                        mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Message was not sent to the server.");
+                    }
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -240,9 +250,19 @@ public class StudentAttendance implements Initializable {
                             Your child %s has safely arrived at their tuition center at %s.
                             Thank you for trusting us with their learning journey! 😊
                             """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
-                    if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
-                        mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                    if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
+                        Executors.newSingleThreadExecutor().submit(() -> {
+                            try {
+                                mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                                System.out.println("Message was not sent to the server.");
+                            }
+                        });
+                    }
                     source.setText("Check Out");
+                    inputField.setText("");
                 } else if (source.getText().equals("Check Out")) {
                     va[1] = timeStamp;
                     updateStmt.setString(1, Arrays.toString(va));
@@ -255,8 +275,16 @@ public class StudentAttendance implements Initializable {
                             Your child %s has just left the tuition center at %s.
                             We hope they had a great learning experience today. See you next time! 😊
                             """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
-                    if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
-                        mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                    Executors.newSingleThreadExecutor().submit(() -> {
+                        try {
+                            if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
+                                mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Message was not sent to the server.");
+                        }
+                    });
+                    inputField.setText("");
                 }
 
                 updateStmt.setString(2, edNo);

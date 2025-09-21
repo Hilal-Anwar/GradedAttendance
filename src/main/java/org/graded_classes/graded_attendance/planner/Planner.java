@@ -10,12 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.R;
+import org.graded_classes.graded_attendance.data.GradedDataLoader;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignC;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignH;
 
 import java.net.URL;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
 
 public class Planner extends GradedFxmlLoader implements Initializable {
@@ -23,9 +24,15 @@ public class Planner extends GradedFxmlLoader implements Initializable {
     Breadcrumbs<String> breadCrumb;
     @FXML
     ScrollPane div;
+    LinkedHashMap<String, String> subjectMap = new LinkedHashMap<>();
     Breadcrumbs.BreadCrumbItem<String> root;
     Node classView, subjectView;
     String[] items = {"Class", "Subjects", "Math"};
+    GradedDataLoader gradedDataLoader;
+
+    public Planner(GradedDataLoader gradedDataLoader) {
+        this.gradedDataLoader = gradedDataLoader;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,8 +75,9 @@ public class Planner extends GradedFxmlLoader implements Initializable {
 
 
     public void whenBreadCrumbClicked(Breadcrumbs.BreadCrumbActionEvent<String> stringBreadCrumbActionEvent) {
-        if (stringBreadCrumbActionEvent.getSelectedCrumb().getValue().equals("Class")) {
+        if (stringBreadCrumbActionEvent.getSelectedCrumb().getValue().contains("Class")) {
             div.setContent(classView);
+            stringBreadCrumbActionEvent.getSelectedCrumb().setValue("Class");
         } else if (stringBreadCrumbActionEvent.getSelectedCrumb().getValue().equals("Subjects")) {
             div.setContent(subjectView);
         }
