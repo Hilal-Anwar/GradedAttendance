@@ -50,11 +50,25 @@
     -fx-background-radius: 5;
     -fx-border-radius: 5;
 }
+#list-view .list-cell {
+    -fx-padding: 0.5 1.5 0.5 1.5;
+    -fx-background-radius: 10;
+}
 
 #sub-topic-item {
     -fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-font-family: "AvenirNext LT Pro Regular";
+    -fx-font-size: 20px;
     -fx-border-color: rgba(0, 0, 0, 0.2);
 }
+
+#sub-topic-item:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.02);
+}
+
+
 
 .breadcrumbs {
     -fx-font-size: 30px;

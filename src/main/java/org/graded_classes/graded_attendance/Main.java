@@ -28,7 +28,4 @@ Main extends Application {
         stage.setOnCloseRequest(_ -> System.exit(1));
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
 }

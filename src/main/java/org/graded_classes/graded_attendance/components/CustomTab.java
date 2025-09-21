@@ -1,6 +1,5 @@
 package org.graded_classes.graded_attendance.components;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
