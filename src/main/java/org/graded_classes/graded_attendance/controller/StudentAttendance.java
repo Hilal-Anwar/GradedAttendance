@@ -1,5 +1,6 @@
 package org.graded_classes.graded_attendance.controller;
 
+import atlantafx.base.theme.Styles;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -245,19 +246,25 @@ public class StudentAttendance implements Initializable {
                     attendanceMap.replace(edNo, va);
                     listViewStudents.attendanceDataView.update();
                     String msg = """
-                            📍 Arrival Alert
+                            Arrival Alert
                             Dear Parent,
                             Your child %s has safely arrived at their tuition center at %s.
-                            Thank you for trusting us with their learning journey! 😊
+                            Thank you for trusting us with their learning journey!
                             """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
                     if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
-                        Executors.newSingleThreadExecutor().submit(() -> {
+                        Platform.runLater(()->{
                             try {
-                                mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
+                                    mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                                    mainController.sendNotification("Arrival message was sent successfully", Styles.SUCCESS);
+
+                                }
 
                             } catch (Exception e) {
                                 System.out.println(e.getMessage());
                                 System.out.println("Message was not sent to the server.");
+                                mainController.sendNotification("Message was not sent to the server.", Styles.DANGER);
+
                             }
                         });
                     }
@@ -270,20 +277,25 @@ public class StudentAttendance implements Initializable {
                     source.setVisible(false);
                     listViewStudents.attendanceDataView.update();
                     String msg = """
-                            🚶‍♂️ Departure Alert
+                            Departure Alert
                             Dear Parent,
                             Your child %s has just left the tuition center at %s.
-                            We hope they had a great learning experience today. See you next time! 😊
+                            We hope they had a great learning experience today. See you next time!
                             """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
-                    Executors.newSingleThreadExecutor().submit(() -> {
-                        try {
-                            if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null)
-                                mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                            System.out.println("Message was not sent to the server.");
-                        }
-                    });
+                   Platform.runLater(()->{
+                       try {
+                           if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
+                               mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                               mainController.sendNotification("Departure message was sent successfully", Styles.SUCCESS);
+                           }
+
+                       } catch (Exception e) {
+                           System.out.println(e.getMessage());
+                           System.out.println("Message was not sent to the server.");
+                           mainController.sendNotification("Message was not sent to the server.", Styles.DANGER);
+
+                       }
+                   });
                     inputField.setText("");
                 }
 

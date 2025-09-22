@@ -8,14 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -31,10 +30,14 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignH;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    VBox notificationsVBox, notificationBox;
+    ScrollPane notificationsScrollPane;
     @FXML
     public StackPane stackPane;
     @FXML
@@ -76,7 +79,51 @@ public class MainController implements Initializable {
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
-        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this);
+        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this, getToken());
+        notificationInit();
+    }
+
+    public String getToken() {
+        String query = "SELECT id FROM token LIMIT 1";
+
+        try (PreparedStatement stmt = gradedDataLoader.databaseLoader.getConnection().prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getString("id");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null; // No token found or error occurred
+    }
+
+
+    private void notificationInit() {
+        notificationBox = (VBox) gradedFxmlLoader.createView(R.notification);
+        notificationsScrollPane = (ScrollPane) notificationBox.getChildren().getFirst();
+        StackPane.setAlignment(notificationBox, Pos.TOP_RIGHT);
+        StackPane.setMargin(notificationBox, new Insets(5, 5, 0, 0));
+        notificationsVBox = (VBox) notificationsScrollPane.getContent();
+        Button clearAllButton = (Button) ((HBox) notificationBox.getChildren().get(1)).getChildren().getFirst();
+        clearAllButton.setOnAction(_ -> {
+
+            for (int i = 0; i < notificationsVBox.getChildren().size(); i++) {
+                var node = notificationsVBox.getChildren().get(i);
+                var out = Animations.slideOutRight(node, Duration.millis(500));
+                out.setOnFinished(_ -> {
+                    notificationsVBox.getChildren().remove(node);
+                    if (notificationsVBox.getChildren().isEmpty()) {
+                        notificationsScrollPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                        stackPane.getChildren().remove(notificationBox);
+
+                    }
+                });
+                out.playFromStart();
+            }
+        });
     }
 
     @FXML
@@ -100,7 +147,7 @@ public class MainController implements Initializable {
             case "chat" -> chat;
             case "calender" -> calendar;
             case "database" -> gradedFxmlLoader.createView(R.database_layout, new DataBaseController(this));
-            case "lesson" -> gradedFxmlLoader.createView(R.lesson_planner,new Planner(gradedDataLoader));
+            case "lesson" -> gradedFxmlLoader.createView(R.lesson_planner, new Planner(gradedDataLoader));
             default -> null;
         };
     }
@@ -118,25 +165,41 @@ public class MainController implements Initializable {
     }
 
     public void sendNotification(String message, String styles) {
+        if (!stackPane.getChildren().contains(notificationBox)) {
+            stackPane.getChildren().add(notificationBox);
+        }
         var msg = new Notification(message, new FontIcon(MaterialDesignH.HELP_CIRCLE_OUTLINE));
         msg.getStyleClass().add(styles);
         msg.setPrefHeight(Region.USE_PREF_SIZE);
         msg.setMaxHeight(Region.USE_PREF_SIZE);
-        StackPane.setAlignment(msg, Pos.TOP_RIGHT);
-        StackPane.setMargin(msg, new Insets(10, 10, 0, 0));
         msg.setOnClose(_ -> {
             var out = Animations.slideOutUp(msg, Duration.millis(250));
-            out.setOnFinished(_ -> stackPane.getChildren().remove(msg));
+            out.setOnFinished(_ -> {
+                notificationsVBox.getChildren().remove(msg);
+                if (notificationsVBox.getChildren().size() <= 5) {
+                    notificationsScrollPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+                }
+                if (notificationsVBox.getChildren().isEmpty()) {
+                    notificationsScrollPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                    stackPane.getChildren().remove(notificationBox);
+
+                }
+            });
             out.playFromStart();
         });
+        System.out.println(msg);
+        System.out.println(notificationsVBox);
         var in = Animations.slideInDown(msg, Duration.millis(250));
-        if (!stackPane.getChildren().contains(msg)) {
-            stackPane.getChildren().addAll(msg);
+        if (!notificationsVBox.getChildren().contains(msg)) {
+            VBox.setMargin(msg, new Insets(2));
+            notificationsVBox.getChildren().addAll(msg);
+
         }
         in.playFromStart();
     }
 
-    public void onSetting(MouseEvent mouseEvent) {
+    public void onSetting() {
 
     }
 }

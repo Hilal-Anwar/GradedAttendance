@@ -18,7 +18,8 @@ public enum R {
     subject("fxml/subjects.fxml"),
     add_lesson("fxml/add_lesson.fxml"),
     add_subtopic("fxml/subtopic.fxml"),
-    create_topic("fxml/topics_creator.fxml");
+    create_topic("fxml/topics_creator.fxml"),
+    notification("fxml/notifications.fxml");
     private final String path;
 
     R(String path) {
