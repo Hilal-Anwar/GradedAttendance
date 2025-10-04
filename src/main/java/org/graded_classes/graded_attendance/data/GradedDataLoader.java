@@ -31,9 +31,7 @@ public class GradedDataLoader {
             databaseLoader.getStatement().execute("PRAGMA foreign_keys = ON;");
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/GradedData.sql").getQuery());
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/AbandonedEd.sql").getQuery());
-            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Attendance.sql").getQuery().
-                    formatted("atte_" + monthName, "atte_" + monthName, "atte_" + monthName,
-                            "atte_" + monthName, "atte_" + monthName, "atte_" + monthName, "atte_" + monthName));
+            databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/attendance_stu.sql").getQuery());
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/Fee.sql").getQuery());
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/LessonPlanner.sql").getQuery());
             databaseLoader.getStatement().executeUpdate(new SqlFileReader("data/TopicAndSubtopic.sql").getQuery());

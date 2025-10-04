@@ -39,7 +39,8 @@ public class TopicCreator implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titledPane.setText(topic);
         var listOfSubtopics = getSubtopic();
-        if (listOfSubtopics != null) {
+        System.out.println(listOfSubtopics);
+        if (listOfSubtopics != null && !listOfSubtopics.isEmpty()) {
             var v=listOfSubtopics.split(",");
             for (var x : v) {
                 HBox node = (HBox) planner.createView(R.add_subtopic, new SubtopicCreator(planner, x));

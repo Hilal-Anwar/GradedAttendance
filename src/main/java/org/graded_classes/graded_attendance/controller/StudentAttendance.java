@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.GradedResourceLoader;
+import org.graded_classes.graded_attendance.data.Attendance;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,9 +28,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
 import java.util.*;
-import java.util.concurrent.Executors;
 
 import static org.graded_classes.graded_attendance.GradedResourceLoader.loadURL;
 
@@ -51,7 +50,7 @@ public class StudentAttendance implements Initializable {
     VBox outer_main_box;
     String id;
     ListViewStudents listViewStudents;
-    LinkedHashMap<String, String[]> attendanceMap = new LinkedHashMap<>();
+    LinkedHashMap<String, Attendance> attendanceMap = new LinkedHashMap<>();
 
     public StudentAttendance(MainController mainController,
                              GradedFxmlLoader gradedFxmlLoader,
@@ -64,37 +63,21 @@ public class StudentAttendance implements Initializable {
     }
 
     private void init() {
-        // Format today's date as a valid column name
-        System.out.println(searchCrossIcon);
-        String columnName = LocalDate.now().toString();
-        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
-        try (Statement stmt = mainController.gradedDataLoader.databaseLoader.getStatement()) {
-
-            // Get existing columns
-            ResultSet rs = stmt.executeQuery("PRAGMA table_info(" + tableName + ")");
-            boolean columnExists = false;
-
-            while (rs.next()) {
-                String existingColumn = rs.getString("name");
-                if (existingColumn.equalsIgnoreCase(columnName)) {
-                    columnExists = true;
-                    break;
-                }
-            }
-
-            // Add column if it doesn't exist
-            if (!columnExists) {
-                String alterSQL = "ALTER TABLE \"" + tableName + "\" ADD COLUMN \"" + columnName + "\" TEXT";
-                stmt.executeUpdate(alterSQL);
-                System.out.println("Column '" + columnName + "' added to table '" + tableName + "'.");
-            } else {
-                System.out.println("Column '" + columnName + "' already exists in table '" + tableName + "'.");
-            }
-            ResultSet r = stmt.executeQuery("select * from " + tableName);
+        String date = LocalDate.now().toString();
+        try {
+            var stmt = mainController.gradedDataLoader.databaseLoader.getConnection();
+            String sql = "SELECT * FROM Attendance WHERE date = ?";
+            PreparedStatement pst = stmt.prepareStatement(sql);
+            pst.setString(1, date);
+            ResultSet r = pst.executeQuery();
             while (r.next()) {
 
-                attendanceMap.put(r.getString("ed_no"), getFromArray(r.getString(columnName)));
+                attendanceMap.put(r.getString("ed_no"),
+                        new Attendance(r.getString("check_in"),
+                                r.getString("check_out"),
+                                r.getString("homework")));
             }
+            System.out.println(attendanceMap);
 
         } catch (SQLException _) {
 
@@ -170,10 +153,8 @@ public class StudentAttendance implements Initializable {
     @FXML
     public void doAction(ActionEvent event) {
         Button source = (Button) event.getSource();
-        String columnName = LocalDate.now().toString();
-        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
         if (!inputField.getText().isEmpty()) {
-            updateAttendance(tableName, columnName, source);
+            updateAttendance(source,true);
         }
 
     }
@@ -188,122 +169,104 @@ public class StudentAttendance implements Initializable {
     }
 
     public void updateHomeWorkStatus(String val) {
-        Connection conn = mainController.gradedDataLoader.databaseLoader.getConnection();
         String edNo = listViewStudents.ed;
-        String columnName = LocalDate.now().toString();
-        String tableName = "atte_" + LocalDate.now().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
-        try (PreparedStatement checkStmt = conn.prepareStatement("SELECT 1 FROM " + tableName + " WHERE ed_no = ?")) {
-            checkStmt.setString(1, edNo);
-            ResultSet checkRs = checkStmt.executeQuery();
-
-            if (checkRs.next()) {
-                String updateSQL = "UPDATE \"" + tableName + "\" SET \"" + columnName + "\" = ? WHERE ed_no = ?";
-                PreparedStatement updateStmt = conn.prepareStatement(updateSQL);
-                String[] va = attendanceMap.get(edNo);
-                va[2] = val;
-                updateStmt.setString(1, Arrays.toString(va));
-                updateStmt.setString(2, edNo);
-                updateStmt.executeUpdate();
-                System.out.println("Updated column '" + columnName + "' for ed_no '" + edNo + "'.");
-                String msg = """
-                        🎉 Homework Completed!
-                        Dear Parent,
-                        Great news! Your child %s has successfully completed their homework for today.
-                        We’re proud of their effort and commitment to learning. Keep up the great work! 🌟
-                        """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name());
-                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
-                    try {
-                        mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                        System.out.println("Message was not sent to the server.");
-                    }
+        String date = LocalDate.now().toString();
+        try (
+                Connection conn = mainController.gradedDataLoader.databaseLoader.getConnection();
+                PreparedStatement updateStmt = conn.prepareStatement("UPDATE Attendance SET homework = ? WHERE ed_no = ? and date = ?")) {
+            updateStmt.setString(1, val);
+            updateStmt.setString(2, edNo);
+            updateStmt.setString(3, date);
+            updateStmt.executeUpdate();
+            String msg = """
+                    🎉 Homework Completed!
+                    Dear Parent,
+                    Great news! Your child %s has successfully completed their homework for today.
+                    We’re proud of their effort and commitment to learning. Keep up the great work! 🌟
+                    """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name());
+            if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
+                try {
+                    mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Message was not sent to the server.");
                 }
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void updateAttendance(String tableName, String columnName, Button source) {
-        String timeStamp = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
+    public void updateAttendance(Button source,boolean shouldMessageBeSend) {
+        String timeStamp = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"));
         Connection conn = mainController.gradedDataLoader.databaseLoader.getConnection();
         String edNo = listViewStudents.ed;
-        try (PreparedStatement checkStmt = conn.prepareStatement("SELECT 1 FROM " + tableName + " WHERE ed_no = ?")) {
-            checkStmt.setString(1, edNo);
-            ResultSet checkRs = checkStmt.executeQuery();
-
-            if (checkRs.next()) {
-                // Update the column for the student
-                String updateSQL = "UPDATE \"" + tableName + "\" SET \"" + columnName + "\" = ? WHERE ed_no = ?";
-                PreparedStatement updateStmt = conn.prepareStatement(updateSQL);
-                String[] va = attendanceMap.get(edNo);
-                System.out.println(Arrays.toString(va));
-                if (source.getText().equals("Check In")) {
-                    va[0] = timeStamp;
-                    System.out.println(Arrays.toString(va));
-                    updateStmt.setString(1, Arrays.toString(va));
-                    attendanceMap.replace(edNo, va);
-                    listViewStudents.attendanceDataView.update();
-                    String msg = """
-                            Arrival Alert
-                            Dear Parent,
-                            Your child %s has safely arrived at their tuition center at %s.
-                            Thank you for trusting us with their learning journey!
-                            """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
-                    if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
-                        Platform.runLater(()->{
-                            try {
-                                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
-                                    mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
-                                    mainController.sendNotification("Arrival message was sent successfully", Styles.SUCCESS);
-
-                                }
-
-                            } catch (Exception e) {
-                                System.out.println(e.getMessage());
-                                System.out.println("Message was not sent to the server.");
-                                mainController.sendNotification("Message was not sent to the server.", Styles.DANGER);
+        String date = LocalDate.now().toString();
+        try {
+            if (source.getText().equals("Check In")) {
+                PreparedStatement updateStmt = conn.prepareStatement("UPDATE Attendance SET check_in = ?  WHERE ed_no = ? and date= ?");
+                updateStmt.setString(2, edNo);
+                updateStmt.setString(3, date);
+                updateStmt.setString(1, timeStamp);
+                attendanceMap.get(edNo).setCheck_in(timeStamp);
+                listViewStudents.attendanceDataView.update();
+                String msg = """
+                        Arrival Alert
+                        Dear Parent,
+                        Your child %s has safely arrived at their tuition center at %s.
+                        Thank you for trusting us with their learning journey!
+                        """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
+                if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null && shouldMessageBeSend) {
+                    Platform.runLater(() -> {
+                        try {
+                            if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
+                                mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                                mainController.sendNotification("Arrival message was sent successfully for " + edNo, Styles.SUCCESS);
 
                             }
-                        });
-                    }
-                    source.setText("Check Out");
-                    inputField.setText("");
-                } else if (source.getText().equals("Check Out")) {
-                    va[1] = timeStamp;
-                    updateStmt.setString(1, Arrays.toString(va));
-                    attendanceMap.replace(edNo, va);
-                    source.setVisible(false);
-                    listViewStudents.attendanceDataView.update();
-                    String msg = """
-                            Departure Alert
-                            Dear Parent,
-                            Your child %s has just left the tuition center at %s.
-                            We hope they had a great learning experience today. See you next time!
-                            """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
-                   Platform.runLater(()->{
-                       try {
-                           if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null) {
-                               mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
-                               mainController.sendNotification("Departure message was sent successfully", Styles.SUCCESS);
-                           }
 
-                       } catch (Exception e) {
-                           System.out.println(e.getMessage());
-                           System.out.println("Message was not sent to the server.");
-                           mainController.sendNotification("Message was not sent to the server.", Styles.DANGER);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            System.out.println("Message was not sent to the server.");
+                            mainController.sendNotification("Message was not sent to the server for " + edNo, Styles.DANGER);
 
-                       }
-                   });
-                    inputField.setText("");
+                        }
+                    });
                 }
-
-                updateStmt.setString(2, edNo);
+                source.setText("Check Out");
+                inputField.setText("");
                 updateStmt.executeUpdate();
-                System.out.println("Updated column '" + columnName + "' for ed_no '" + edNo + "'.");
-            } else {
-                System.out.println("Student with ed_no '" + edNo + "' not found.");
+            } else if (source.getText().equals("Check Out")) {
+                PreparedStatement updateStmt = conn.prepareStatement("UPDATE Attendance SET check_out = ?  WHERE ed_no = ? and date= ?");
+                updateStmt.setString(2, edNo);
+                updateStmt.setString(3, date);
+                updateStmt.setString(1, timeStamp);
+                attendanceMap.get(edNo).setCheck_out(timeStamp);
+                source.setVisible(false);
+                listViewStudents.attendanceDataView.update();
+                String msg = """
+                        Departure Alert
+                        Dear Parent,
+                        Your child %s has just left the tuition center at %s.
+                        We hope they had a great learning experience today. See you next time!
+                        """.formatted(mainController.gradedDataLoader.getStudentData().get(edNo).name(), timeStamp);
+                Platform.runLater(() -> {
+                    try {
+                        if (mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id() != null && shouldMessageBeSend) {
+                            mainController.messageSender.sendMessage(msg, Long.parseLong(mainController.gradedDataLoader.getStudentData().get(edNo).telegram_id()));
+                            mainController.sendNotification("Departure message was sent successfully for " + edNo, Styles.SUCCESS);
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        System.out.println("Message was not sent to the server.");
+                        mainController.sendNotification("Message was not sent to the server for " + edNo, Styles.DANGER);
+
+                    }
+                });
+                inputField.setText("");
+                updateStmt.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

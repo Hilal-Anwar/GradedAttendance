@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="410.0" prefWidth="560.0" styleClass="data_viewer" stylesheets="@../css/data-view-style.css" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.AttendanceDataView">
+<VBox alignment="TOP_CENTER" maxWidth="1000.0" prefHeight="410.0" prefWidth="560.0" styleClass="data_viewer" stylesheets="@../css/data-view-style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.AttendanceDataView">
    <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
       <tabs>
          <Tab fx:id="info" text="Info">
@@ -79,10 +79,7 @@
                                        <Insets left="5.0" />
                                     </VBox.margin>
                                  </Label>
-                                 <Label id="onLabel" fx:id="checkInTime" text="Unknown" textFill="RED">
-                                    <font>
-                                       <Font name="System Bold" size="16.0" />
-                                    </font>
+                                 <Label id="onLabelIn" fx:id="checkInTime" onMouseClicked="#editTime" text="Unknown" textFill="RED">
                                     <VBox.margin>
                                        <Insets left="5.0" />
                                     </VBox.margin>
@@ -95,10 +92,7 @@
                                        <Insets left="5.0" />
                                     </VBox.margin>
                                  </Label>
-                                 <Label id="onLabel" fx:id="checkOutTime" text="Unknown" textFill="RED">
-                                    <font>
-                                       <Font name="System Bold" size="16.0" />
-                                    </font>
+                                 <Label id="onLabelOut" fx:id="checkOutTime" onMouseClicked="#editTime" text="Unknown" textFill="RED">
                                     <VBox.margin>
                                        <Insets left="5.0" />
                                     </VBox.margin>

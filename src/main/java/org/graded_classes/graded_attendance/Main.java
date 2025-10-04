@@ -12,8 +12,7 @@ import org.graded_classes.graded_attendance.controller.MainController;
 import java.io.IOException;
 import java.util.Objects;
 
-public class
-Main extends Application {
+public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GradedResourceLoader.loadURL("fxml/main_layout.fxml"));

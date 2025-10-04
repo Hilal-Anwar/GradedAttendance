@@ -15,6 +15,9 @@ module org.graded_classes.graded_attendance {
     requires com.calendarfx.view;
     requires telegrambots.client;
     requires telegrambots.longpolling;
+    requires org.kordamp.ikonli.core;
+    requires org.kordamp.ikonli.material2;
+    requires java.desktop;
 
     opens org.graded_classes.graded_attendance.controller to javafx.fxml, javafx.graphics, org.xerial.sqlitejdbc, java.sql;
     opens org.graded_classes.graded_attendance.planner to javafx.fxml;
@@ -22,4 +25,8 @@ module org.graded_classes.graded_attendance {
     opens org.graded_classes.graded_attendance.messaging;
     exports org.graded_classes.graded_attendance;
     opens org.graded_classes.graded_attendance;
+    exports org.graded_classes.graded_attendance.calender;
+    opens org.graded_classes.graded_attendance.calender;
+    exports org.graded_classes.graded_attendance.components;
+    opens org.graded_classes.graded_attendance.components;
 }

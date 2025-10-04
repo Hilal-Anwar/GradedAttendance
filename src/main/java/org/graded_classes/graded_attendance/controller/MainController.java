@@ -19,6 +19,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.graded_classes.graded_attendance.calender.CalendarApp;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.R;
@@ -75,11 +76,11 @@ public class MainController implements Initializable {
         home = gradedFxmlLoader.createView(R.home_layout, new HomeController(modalPane,
                 gradedDataLoader, this));
         chat = gradedFxmlLoader.createView(R.chat_layout, new ChatController());
-        calendar = gradedFxmlLoader.createView(R.calendar_layout, new CalenderController());
+        calendar = new CalendarApp().createCalenderView();
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
-        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this, getToken());
+        //messageSender = new MessageSender(gradedDataLoader.databaseLoader, this, getToken());
         notificationInit();
     }
 
@@ -118,7 +119,6 @@ public class MainController implements Initializable {
                     if (notificationsVBox.getChildren().isEmpty()) {
                         notificationsScrollPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
                         stackPane.getChildren().remove(notificationBox);
-
                     }
                 });
                 out.playFromStart();

@@ -75,6 +75,7 @@ public class TimeTableView extends TimeTable implements Initializable {
         return new ObservableValueBase<>() {
             @Override
             public String getValue() {
+
                 return mapStringCellDataFeatures.getValue().get(key).toString();
             }
         };

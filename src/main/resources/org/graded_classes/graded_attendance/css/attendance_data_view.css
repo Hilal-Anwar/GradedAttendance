@@ -4,7 +4,7 @@
     -fx-font-family: "Helvetica";
 }
 
-#onLabel {
+#onLabel,#onLabelIn,#onLabelOut {
     -fx-font-family: 'Helvetica Rounded';
     -fx-font-size: 14px;
 }

@@ -1,21 +1,16 @@
-package org.graded_classes.graded_attendance;
+package org.graded_classes.graded_attendance.calender;
 
-import atlantafx.base.theme.PrimerLight;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class CalendarApp extends Application {
+public class CalendarApp  {
 
-    @Override
-    public void start(Stage primaryStage) {
+    public CalendarView createCalenderView() {
 
         CalendarView calendarView = new CalendarView(); // (1)
 
@@ -32,14 +27,7 @@ public class CalendarApp extends Application {
 
         Thread updateTimeThread = getThread(calendarView);
         updateTimeThread.start();
-
-        Scene scene = new Scene(calendarView);
-        scene.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
-
-        primaryStage.setTitle("Calendar");
-        primaryStage.setScene(scene);
-        primaryStage.centerOnScreen();
-        primaryStage.show();
+        return calendarView;
     }
 
     private static Thread getThread(CalendarView calendarView) {
@@ -66,9 +54,5 @@ public class CalendarApp extends Application {
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         return updateTimeThread;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
