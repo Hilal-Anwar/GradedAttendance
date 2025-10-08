@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" style="-fx-background-radius: 5; -fx-border-color: rgba(0, 0, 0, 0.2); -fx-border-radius: 5; -fx-background-color: #1C75BC20;" xmlns="http://javafx.com/javafx/24" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="5.0" style="-fx-background-radius: 5; -fx-border-color: rgba(0, 0, 0, 0.2); -fx-border-radius: 5; -fx-background-color: #1C75BC20;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <content>
             <VBox id="notificationsVBox" />
          </content>

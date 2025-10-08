@@ -16,6 +16,3 @@
 .table-view .scroll-bar{
     -fx-opacity: 0;
 }
-.table-view .table-cell {
-    -fx-background-color: #f1e2e2;
-}

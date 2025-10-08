@@ -80,7 +80,7 @@ public class MainController implements Initializable {
         main_view.setCenter(navigateView("home"));
         tooltip = new Tooltip(Formatter.format(selectedTab.getId()));
         Tooltip.install(selectedTab, tooltip);
-        //messageSender = new MessageSender(gradedDataLoader.databaseLoader, this, getToken());
+        messageSender = new MessageSender(gradedDataLoader.databaseLoader, this, getToken());
         notificationInit();
     }
 
@@ -188,11 +188,12 @@ public class MainController implements Initializable {
             });
             out.playFromStart();
         });
-        System.out.println(msg);
-        System.out.println(notificationsVBox);
         var in = Animations.slideInDown(msg, Duration.millis(250));
         if (!notificationsVBox.getChildren().contains(msg)) {
             VBox.setMargin(msg, new Insets(2));
+            if (notificationsVBox.getChildren().size() >= 5) {
+                notificationsScrollPane.setPrefHeight(300);
+            }
             notificationsVBox.getChildren().addAll(msg);
 
         }

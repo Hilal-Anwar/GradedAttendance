@@ -1,11 +1,16 @@
 package org.graded_classes.graded_attendance.controller;
 
 
+import atlantafx.base.theme.Styles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.data.Student;
 
 import java.net.URL;
@@ -28,6 +33,8 @@ public class AddStudent implements Initializable {
 
     @FXML
     private TextArea address;
+    @FXML
+    VBox form;
     String str;
     HashSet<String> abandonedList = new HashSet<>();
     @FXML
@@ -59,16 +66,51 @@ public class AddStudent implements Initializable {
     void apply(ActionEvent event) {
 
         Button button = (Button) event.getSource();
-        if (button.getText().equals("Apply")) {
+        boolean valid = getVarification();
+        if (button.getText().equals("Apply") && valid) {
             var studentInfo = getStudent();
             if (agree.isSelected()) {
                 homeController.gradedDataLoader.addStudent(studentInfo);
                 homeController.gradedDataLoader.removeEdFromAbandonedEd(studentInfo.ed_no());
+
                 homeController.modalPane.hide();
             }
         } else if (button.getText().equals("Cancel")) {
 
         }
+    }
+
+    private boolean getVarification() {
+        int counter = 0;
+        for (var node : form.getChildren()) {
+            if (node instanceof HBox h) {
+                for (var n : h.getChildren())
+                    if (n instanceof TextField textField) {
+                        if (textField.getText().isEmpty() && textField.getId().equals("imp")) {
+                            textField.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+                            counter++;
+                        }
+                    }
+            }
+        }
+        if (_class.getSelectionModel().getSelectedItem()==null) {
+            _class.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            counter++;
+        }
+        if (blood_group.getSelectionModel().getSelectedItem()==null) {
+            blood_group.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            counter++;
+        }
+        if (gender.getSelectionModel().getSelectedItem()==null) {
+            gender.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            counter++;
+        }
+        if (dob.getEditor().getText().isEmpty()) {
+            dob.getEditor().pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            dob.pseudoClassStateChanged(Styles.STATE_DANGER, true);
+            counter++;
+        }
+        return counter == 0;
     }
 
     public Student getStudent() {
@@ -108,17 +150,27 @@ public class AddStudent implements Initializable {
 
     }
 
+    @FXML
+    void onClicked(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        source.pseudoClassStateChanged(Styles.STATE_DANGER, false);
+        if ( source instanceof DatePicker datePicker){
+            datePicker.pseudoClassStateChanged(Styles.STATE_DANGER, false);
+            datePicker.getEditor().pseudoClassStateChanged(Styles.STATE_DANGER, false);
+        }
+
+    }
+
     public String getNextED() {
         if (homeController.gradedDataLoader.getStudentData().isEmpty())
             return "ED01";
-        else if (abandonedEdPresent()){
-                var data=homeController.gradedDataLoader.loadAbandonedEdNos();
-                var abd=data.getFirst();
-                data.removeFirst();
-                return abd ;
+        else if (abandonedEdPresent()) {
+            var data = homeController.gradedDataLoader.loadAbandonedEdNos();
+            var abd = data.getFirst();
+            data.removeFirst();
+            return abd;
 
-        }
-        else {
+        } else {
             var endKey = homeController.gradedDataLoader.getStudentData().lastEntry().getKey();
             return generate(endKey);
         }

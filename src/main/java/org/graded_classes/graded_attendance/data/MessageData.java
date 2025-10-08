@@ -13,10 +13,11 @@ public class MessageData {
     DatabaseLoader databaseLoader;
     MainController mainController;
 
-    public Stream<String> getStudentId(){
-        return mainController.gradedDataLoader.studentData.values().stream().
-                map(Student::telegram_id).filter(Objects::nonNull);
+    public boolean isThisStudentPresent(String edNo) {
+        return mainController.gradedDataLoader.studentData.containsKey(edNo) && mainController.gradedDataLoader.studentData.get(edNo).telegram_id() != null &&
+                !mainController.gradedDataLoader.studentData.get(edNo).telegram_id().trim().isEmpty();
     }
+
     public MessageData(DatabaseLoader databaseLoader, MainController mainController) {
         this.mainController = mainController;
         this.databaseLoader = databaseLoader;

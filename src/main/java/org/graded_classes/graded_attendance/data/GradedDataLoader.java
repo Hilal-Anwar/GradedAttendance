@@ -127,6 +127,7 @@ public class GradedDataLoader {
     public void addStudent(Student student) {
         try {
             studentData.put(student.ed_no(), student);
+
             student.insertIntoDatabase(databaseLoader.getStatement().getConnection());
             mainController.sendNotification("Student with ed_no " + student.ed_no() + " added successfully.\n\n", Styles.SUCCESS);
         } catch (SQLException e) {

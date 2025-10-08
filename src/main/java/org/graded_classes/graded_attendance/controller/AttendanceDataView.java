@@ -1,11 +1,8 @@
 package org.graded_classes.graded_attendance.controller;
 
-import atlantafx.base.controls.CustomTextField;
 import atlantafx.base.controls.MaskTextField;
 import atlantafx.base.controls.ToggleSwitch;
 import atlantafx.base.theme.Styles;
-import atlantafx.base.util.MaskChar;
-import atlantafx.base.util.MaskTextFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,19 +18,17 @@ import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.R;
 import org.graded_classes.graded_attendance.data.Attendance;
 import org.graded_classes.graded_attendance.data.Student;
-import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
-import org.kordamp.ikonli.material2.Material2OutlinedAL;
 import org.kordamp.ikonli.material2.Material2OutlinedMZ;
-import org.kordamp.ikonli.materialdesign2.MaterialDesignT;
 
-import javax.sound.midi.MidiFileFormat;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
@@ -238,12 +233,10 @@ public class AttendanceDataView implements Initializable {
                         LocalTime.parse(val.toUpperCase(), DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
                         timeField.pseudoClassStateChanged(Styles.STATE_DANGER, false);
                         if (time.getId().equals("onLabelIn")) {
-                            checkInTime.setText(val);
-                            studentAttendance.updateAttendance(new Button("Check In"),false);
+                            studentAttendance.updateAttendance(new Button("Check In"),false,val);
                             update();
                         } else if (time.getId().equals("onLabelOut")) {
-                            checkOutTime.setText(val);
-                            studentAttendance.updateAttendance(new Button("Check Out"),false);
+                            studentAttendance.updateAttendance(new Button("Check Out"),false,val);
                             update();
                         }
 

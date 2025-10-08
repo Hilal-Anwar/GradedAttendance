@@ -2,7 +2,6 @@
 
 <?import atlantafx.base.controls.MaskTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -55,14 +54,5 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </VBox>
-      <HBox alignment="CENTER_RIGHT" spacing="10.0">
-         <children>
-            <Button mnemonicParsing="false" text="Cancel" />
-            <Button mnemonicParsing="false" text="Apply" />
-         </children>
-         <VBox.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin>
-      </HBox>
    </children>
 </VBox>

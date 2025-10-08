@@ -1,7 +1,7 @@
 package org.graded_classes.graded_attendance;
 
 public enum R {
-    add_people("fxml/add_people.fxml"), add_student("fxml/add_student.fxml"),
+    add_people("fxml/add_people.fxml"),
     custom_data_view("fxml/custom_data_view.fxml"), fee_report("fxml/fee_report.fxml"), home_layout("fxml/home_tab.fxml"),
     new_student_layout("fxml/new_student_layout.fxml"), new_teacher_layout("fxml/new_teacher_layout.fxml"), student_attendance_layout("fxml/student_attendance_layout.fxml"),
     student_fee_layout("fxml/student_fee_layout.fxml"),

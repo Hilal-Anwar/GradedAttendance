@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import org.graded_classes.graded_attendance.GradedFxmlLoader;
 import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.data.Attendance;
+import org.graded_classes.graded_attendance.data.Student;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +53,11 @@ public class StudentAttendance implements Initializable {
     ListViewStudents listViewStudents;
     LinkedHashMap<String, Attendance> attendanceMap = new LinkedHashMap<>();
 
+    public ArrayList<HBox> getBoxes() {
+        return boxes;
+    }
+
+    ArrayList<HBox> boxes = new ArrayList<>();
     public StudentAttendance(MainController mainController,
                              GradedFxmlLoader gradedFxmlLoader,
                              VBox outer_main_box, String id) {
@@ -95,6 +101,10 @@ public class StudentAttendance implements Initializable {
     @FXML
     void show_search() {
         if (search_box.getChildren().size() == 1) {
+            if (mainController.gradedDataLoader.getStudentData().size()>boxes.size()) {
+                var entry=mainController.gradedDataLoader.getStudentData().lastEntry();
+                boxes.add(makeStudent(entry.getKey(),entry.getValue().name()));
+            }
             search_box.getChildren().add(box);
         }
     }
@@ -136,25 +146,28 @@ public class StudentAttendance implements Initializable {
 
     private ObservableList<HBox> generate() {
         var l = mainController.gradedDataLoader.getStudentData();
-        ArrayList<HBox> boxes = new ArrayList<>();
         for (var x : l.keySet()) {
-            Label ed = new Label(x);
-            ed.setMinWidth(50);
-            Label name = new Label(l.get(x).name());
-            HBox hBox = new HBox(ed, name);
-            hBox.setSpacing(30);
-            hBox.setId(x + " " + l.get(x).name());
-            hBox.getStyleClass().add("hbox");
-            boxes.add(hBox);
+            boxes.add(makeStudent(x, l.get(x).name()));
         }
         return FXCollections.observableList(boxes);
+    }
+
+    private static HBox makeStudent(String edNumber, String studentName) {
+        Label ed = new Label(edNumber);
+        ed.setMinWidth(50);
+        Label name = new Label(studentName);
+        HBox hBox = new HBox(ed, name);
+        hBox.setSpacing(30);
+        hBox.setId(edNumber + " " + studentName);
+        hBox.getStyleClass().add("hbox");
+        return hBox;
     }
 
     @FXML
     public void doAction(ActionEvent event) {
         Button source = (Button) event.getSource();
         if (!inputField.getText().isEmpty()) {
-            updateAttendance(source,true);
+            updateAttendance(source,true,null);
         }
 
     }
@@ -198,8 +211,8 @@ public class StudentAttendance implements Initializable {
         }
     }
 
-    public void updateAttendance(Button source,boolean shouldMessageBeSend) {
-        String timeStamp = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"));
+    public void updateAttendance(Button source,boolean shouldMessageBeSend,String updatedTime) {
+        String timeStamp = updatedTime==null?LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a")):updatedTime;
         Connection conn = mainController.gradedDataLoader.databaseLoader.getConnection();
         String edNo = listViewStudents.ed;
         String date = LocalDate.now().toString();

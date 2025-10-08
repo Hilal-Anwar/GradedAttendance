@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="body_new_pane" maxHeight="750.0" maxWidth="800.0" minHeight="750.0" minWidth="800.0" stylesheets="@../css/new-admission.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.AddStudent">
+<AnchorPane id="body_new_pane" maxHeight="750.0" maxWidth="800.0" minHeight="750.0" minWidth="800.0" stylesheets="@../css/new-admission.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.graded_classes.graded_attendance.controller.AddStudent">
     <children>
         <ScrollPane id="container" maxHeight="750.0" maxWidth="760.0" minHeight="750.0" minWidth="770.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <content>
-                <VBox id="formBox" spacing="10.0">
+                <VBox id="formBox" fx:id="form" spacing="10.0">
                     <children>
                         <Label text="Personal Details :">
                             <VBox.margin>
@@ -27,9 +27,9 @@
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
                                 <TextField fx:id="ed_no" editable="false" prefHeight="36.0" prefWidth="132.0" promptText="ED No." />
-                                <DatePicker fx:id="dob" prefHeight="36.0" prefWidth="190.0" promptText="Date of birth" />
-                                <ComboBox fx:id="gender" prefWidth="138.0" promptText="Gender" />
-                                <ComboBox fx:id="blood_group" prefHeight="36.0" prefWidth="157.0" promptText="Blood Group" />
+                                <DatePicker fx:id="dob" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="190.0" promptText="Date of birth" />
+                                <ComboBox fx:id="gender" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="138.0" promptText="Gender" />
+                                <ComboBox fx:id="blood_group" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="157.0" promptText="Blood Group" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
@@ -37,9 +37,9 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
-                                <TextField fx:id="first_name" promptText="First Name" />
-                                <TextField fx:id="last_name" promptText="Last Name" />
-                                <ComboBox fx:id="_class" prefWidth="150.0" promptText="Class" />
+                                <TextField id="imp" fx:id="first_name" onMouseClicked="#onClicked" promptText="First Name" />
+                                <TextField id="imp" fx:id="last_name" onMouseClicked="#onClicked" promptText="Last Name" />
+                                <ComboBox fx:id="_class" onMouseClicked="#onClicked" prefWidth="150.0" promptText="Class" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
@@ -47,9 +47,9 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
-                                <TextField fx:id="father_f_name" promptText="Father first Name" />
-                                <TextField fx:id="father_l_name" promptText="Father last Name" />
-                                <TextField fx:id="father_occ" promptText="Father's Occupation" />
+                                <TextField id="imp" fx:id="father_f_name" onMouseClicked="#onClicked" promptText="Father first Name" />
+                                <TextField id="imp" fx:id="father_l_name" onMouseClicked="#onClicked" promptText="Father last Name" />
+                                <TextField id="imp" fx:id="father_occ" onMouseClicked="#onClicked" promptText="Father's Occupation" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
@@ -57,9 +57,9 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
-                                <TextField fx:id="mother_f_name" promptText="Mother first Name" />
-                                <TextField fx:id="mother_l_name" promptText="Mother last Name" />
-                                <TextField fx:id="mother_occ" promptText="Mother 's Occupation" />
+                                <TextField id="imp" fx:id="mother_f_name" onMouseClicked="#onClicked" promptText="Mother first Name" />
+                                <TextField id="imp" fx:id="mother_l_name" onMouseClicked="#onClicked" promptText="Mother last Name" />
+                                <TextField id="imp" fx:id="mother_occ" onMouseClicked="#onClicked" promptText="Mother 's Occupation" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
@@ -68,7 +68,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
                                 <TextField fx:id="aadhaar_no" prefHeight="36.0" prefWidth="283.0" promptText="Adahar No." />
-                                <TextField fx:id="email_id" prefHeight="36.0" prefWidth="271.0" promptText="Email" />
+                                <TextField id="imp" fx:id="email_id" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="271.0" promptText="Email" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
@@ -76,8 +76,8 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
-                                <TextField fx:id="g_num" prefHeight="36.0" prefWidth="185.0" promptText="Guardian Phone No." />
-                                <TextField fx:id="school_n" prefHeight="36.0" prefWidth="282.0" promptText="School name" />
+                                <TextField id="imp" fx:id="g_num" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="185.0" promptText="Guardian Phone No." />
+                                <TextField id="imp" fx:id="school_n" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="282.0" promptText="School name" />
                                 <TextField fx:id="telegram_id" prefHeight="36.0" prefWidth="157.0" promptText="Telegram user Id" />
                             </children>
                             <VBox.margin>
@@ -91,7 +91,7 @@
                         </Label>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <TextArea fx:id="address" prefHeight="200.0" prefWidth="200.0" promptText="Permanet Address" HBox.hgrow="ALWAYS" />
+                                <TextArea fx:id="address" onMouseClicked="#onClicked" prefHeight="200.0" prefWidth="200.0" promptText="Permanet Address" HBox.hgrow="ALWAYS" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
@@ -99,8 +99,8 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                             <children>
-                                <TextField fx:id="previous_ins_name" prefHeight="36.0" prefWidth="407.0" promptText="Name of Previous Institute/Tuition Ceneter " />
-                                <TextField fx:id="reason_leaving" prefHeight="36.0" prefWidth="230.0" promptText="Reason for Leaving" />
+                                <TextField fx:id="previous_ins_name" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="407.0" promptText="Name of Previous Institute/Tuition Ceneter " />
+                                <TextField fx:id="reason_leaving" onMouseClicked="#onClicked" prefHeight="36.0" prefWidth="230.0" promptText="Reason for Leaving" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />

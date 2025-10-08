@@ -1,11 +1,18 @@
 
 #customList {
     -fx-font-size: 14px;
+    -fx-background-color: #fafafa;
+    -fx-font-family: 'Gilroy-Bold';
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+#listViewHolder{
+     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
+    -fx-font-size: 14px;
     -fx-font-family: 'Gilroy-Bold';
     -fx-border-color: transparent;
     -fx-background-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
-}
+ }
 #search-helper-list {
     -fx-font-size: 14px;
     -fx-font-family: 'Gilroy-Bold';
@@ -58,7 +65,6 @@
     -fx-background-color: #1C75BC;
     -fx-background-radius: 10;
     -fx-padding: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.12, -1.0, 2.0);
 }
 
 #heading .label {

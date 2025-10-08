@@ -18,9 +18,11 @@ public class TelegramBot implements LongPollingSingleThreadUpdateConsumer {
     public TelegramBot(String botToken) {
         telegramClient = new OkHttpTelegramClient(botToken);
     }
+
     public void setMessageData(MessageData messageData) {
         this.messageData = messageData;
     }
+
     public void sendText(Long who, String what) {
         SendMessage sm = SendMessage.builder()
                 .chatId(who.toString()) //Who are we sending a message to
@@ -44,7 +46,7 @@ public class TelegramBot implements LongPollingSingleThreadUpdateConsumer {
         var user = msg.getFrom();
         String[] test = msg.getText().split(",");
         if (test.length == 3) {
-            if (messageData.getStudentId().toList().contains(String.valueOf(user.getId()))) {
+            if (messageData.isThisStudentPresent(test[0].trim())) {
                 sendText(user.getId(), "You are already added to the messaging system.\nIn the case you want to change it contact the admin or in the office at Graded.\nGood luck, and thank you for your patience!");
                 return;
             }

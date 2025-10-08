@@ -46,10 +46,9 @@ public class DataBaseController implements Initializable {
             HBox tem = new HBox(img);
             HBox end_box = new HBox(tem);
             end_box.setAlignment(Pos.CENTER_RIGHT);
-            end_box.setMinWidth(95);
+            //end_box.setMinWidth(95);
             HBox.getHgrow(end_box);
             HBox hBox = new HBox(ed, name, grade, dob, end_box);
-
             tem.setOnMousePressed(u -> {
                 if (mainController.gradedDataLoader.removeStudent(x)) {
                     mainController.gradedDataLoader.getStudentData().remove(x.ed_no());
@@ -63,7 +62,7 @@ public class DataBaseController implements Initializable {
             hBox.setOnMouseExited(z -> {
                 img.setOpacity(0);
             });
-            hBox.setSpacing(30);
+            //hBox.setSpacing(30);
             hBox.setAlignment(Pos.CENTER_LEFT);
             hBox.setId(x.ed_no());
             hBox.getStyleClass().add("hbox");
