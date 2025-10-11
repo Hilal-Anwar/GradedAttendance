@@ -111,6 +111,7 @@ public class StudentAttendance implements Initializable {
 
     @FXML
     void input() {
+        show_search();
         String filter = inputField.getText();
         if (filter.isEmpty()) {
             searchCrossIcon.setImage(new Image(GradedResourceLoader.load("icons/search.svg")));
@@ -122,7 +123,7 @@ public class StudentAttendance implements Initializable {
         } else {
             filteredData.setPredicate(s -> {
                 if (s.getId() != null)
-                    return s.getId().contains(filter.toUpperCase());
+                    return s.getId().toUpperCase().contains(filter.toUpperCase());
 
                 return true;
             });

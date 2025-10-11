@@ -25,6 +25,7 @@ public class MessageData {
     }
 
     public boolean updateTelegramId(String edNo, String name, String _class, String newTelegramId) {
+
         var rowsAffected = mainController.gradedDataLoader.getStudentData().get(edNo).updateTelegram(databaseLoader.getConnection(), edNo, name, _class, newTelegramId);
         if (rowsAffected > 0) {
             Platform.runLater(() -> mainController.sendNotification(name + " was added to graded messaging system", Styles.SUCCESS));

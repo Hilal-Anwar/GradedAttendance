@@ -20,7 +20,8 @@ public enum R {
     add_subtopic("fxml/subtopic.fxml"),
     create_topic("fxml/topics_creator.fxml"),
     notification("fxml/notifications.fxml"),
-    edit_time("fxml/editTime.fxml");
+    edit_time("fxml/editTime.fxml"),
+    attendance_report("fxml/attendance_report.fxml");
     private final String path;
 
     R(String path) {

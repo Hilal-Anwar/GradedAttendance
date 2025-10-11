@@ -18,6 +18,7 @@ import org.graded_classes.graded_attendance.GradedResourceLoader;
 import org.graded_classes.graded_attendance.R;
 import org.graded_classes.graded_attendance.data.Attendance;
 import org.graded_classes.graded_attendance.data.Student;
+import org.graded_classes.graded_attendance.report.AttendanceReport;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2OutlinedMZ;
 
@@ -210,6 +211,15 @@ public class AttendanceDataView implements Initializable {
 
     @FXML
     void viewReport(ActionEvent event) {
+        AttendanceReport attendanceReport = new AttendanceReport(studentAttendance.mainController.gradedDataLoader.databaseLoader);
+        attendanceReport.init();
+        var x = studentAttendance.mainController.gradedDataLoader;
+        Student student = x.getStudentData().get(ed_no);
+        var view = attendanceReport.getStudentAttendanceReport();
+        studentAttendance.mainController.
+                modalPane.show(studentAttendance.mainController.
+                        gradedFxmlLoader.createView(R.attendance_report,
+                                new AttendanceReportController(firstLetterToUpperCase(student.name()),ed_no,view)));
     }
 
     @FXML
@@ -233,10 +243,10 @@ public class AttendanceDataView implements Initializable {
                         LocalTime.parse(val.toUpperCase(), DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH));
                         timeField.pseudoClassStateChanged(Styles.STATE_DANGER, false);
                         if (time.getId().equals("onLabelIn")) {
-                            studentAttendance.updateAttendance(new Button("Check In"),false,val);
+                            studentAttendance.updateAttendance(new Button("Check In"), false, val);
                             update();
                         } else if (time.getId().equals("onLabelOut")) {
-                            studentAttendance.updateAttendance(new Button("Check Out"),false,val);
+                            studentAttendance.updateAttendance(new Button("Check Out"), false, val);
                             update();
                         }
 
